@@ -1,7 +1,8 @@
-## Dependencies
-The scripts uses Python3 and [Robotframework](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html) and also some aditionnal packages.
+## Description
+Use the scripts to prepare and fill the OpenPaas platform with data : mails, messages, events,... for demo or test purposes.
 
-If you don't have Python3 or Robotframework, you have to install them.
+## Dependencies
+The scripts uses Python3 and [Robotframework](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html) and also some aditionnal packages. If you don't have Python3 or Robotframework, you'll have to install them.
 
 ### Install Python3
 
@@ -19,7 +20,7 @@ In order to install Robotframework and Selenium you will need to have [pip](http
 pip install robotframework
 pip install --upgrade robotframework-seleniumlibrary
 ```
-​
+
 You will also have to download a driver for your preferred browser, you can use webdrivermanager for that. For example
 ```
 pip install webdrivermanager
