@@ -104,7 +104,7 @@ Create Workspace
 	END
 	Click Button	jquery:.button
 	Wait Until Element Is Visible	jquery:textarea.input	timeout=10
-	FOR	${i}	IN RANGE	1	6
+	FOR	${i}	IN RANGE	2	6
 		Switch Browser	${i}
 		Change Channel	${workspaceName}
 	END
@@ -157,7 +157,8 @@ Create Channel
 	[Arguments]	${Channel}
 	Click element	jquery:.uil-plus-circle:first
 	Input Text	jquery:input.full_width.medium	${Channel}
-	Click Button	jquery:button.button.small:last
+	Click Button	jquery:button.button.small.primary-text
+	Click Button	jquery:button.button.small.primary
 
 Choose A Dialog
 	[Documentation]	Select a random dialog (the first line of it) from the file in the language depending on the global variable
