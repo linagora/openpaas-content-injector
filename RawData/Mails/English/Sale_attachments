@@ -1,0 +1,5 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p> The word document attached is a notice/consent form for the sale.  The excel file is an amortization table for the note.</p> 
+<p>You can use the Additional Principal Reduction to record prepayments.  Please email me back to confirm receipt.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

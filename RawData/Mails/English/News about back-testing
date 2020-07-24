@@ -1,0 +1,13 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p>We are currently back-testing the storage model.</p> 
+<p>The enclosed version contains deltas and decision variable.</p> 
+<br> 
+<p>You mentioned that you have resources to run the model. Please do so.</p> 
+<p>This will help us to gain experience with the market vs the model.</p> 
+<br> 
+<p>I am going to distribute an article by Linagora, an software vendor.</p> 
+<p>The article illustrates the optionality associated with storage operation very well.  The the Company Research storage model  is a lot like that, although implementation may be different.</p> 
+<br> 
+<p>Let me know if you have any questions.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

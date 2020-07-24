@@ -1,0 +1,4 @@
+# WARNING: Suppress the first three lines when done, the file must contain only the data
+#logins, passwords of the Twake users (they are supposed to be already created), separated with | as:
+# Watch out : the first user MUST have the administration rights of the company
+anakin.skywalker@example.com|1234password

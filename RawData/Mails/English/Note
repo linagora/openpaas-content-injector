@@ -1,0 +1,7 @@
+<h5>Hi {receiver}</h5><br> 
+<p>Just wanted to send you a note of congratulations, given Q3 EES results  - you are and will continue to be a key and integral component to the success and growth of EES.</p> 
+<br> 
+<p>I know there is a lot of heavy lifting and difficult decisions but I do believe we are starting to put a dent in the issues.  At the same time, we are developing a significant franchise of which the Company can be proud.</p> 
+<br> 
+<p>Thank you <br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

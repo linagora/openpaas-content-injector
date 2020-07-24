@@ -1,0 +1,6 @@
+# WARNING: Suppress the first two lines when done, the file must contain only the data
+# urls of the sites used by the scripts in the following order : OP Calendar, Twake, Twake company name, jmap server
+https://openpaas.example.org/#/calendar
+https://example.twake.app/
+Company Name
+https://jmap.openpass.example.org/

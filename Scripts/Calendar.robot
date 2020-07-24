@@ -1,0 +1,189 @@
+*** Settings ***
+Documentation	Create an event in OpenPaas
+Library         OperatingSystem
+Library		  	SeleniumLibrary
+Library		  	String
+Library		  	Collections
+Library    	  	DateTime
+Resource		Ressources.robot
+
+*** Variables ***
+#can/has t obe changed in command line
+${LOGIN OP}	https://an_open_pass_site/#/calendar
+
+${PATH}		../RawData/
+${YEAR}		2020
+${MONTH}	7
+${DAY}		30
+${LANGUAGE}	English
+#intern variables
+${meridiem}	AM
+
+*** Tasks ***
+Set Variables
+	Set Global Variable	${PATH NAME}	${PATH}/Events/${LANGUAGE}_Name_events
+	Set Global Variable	${PATH LOGINS}	${PATH}/Config/logins
+	${FileUrl}=	Get File	${PATH}/Config/sitesUrl
+	${LOGIN OP}=	Get Line	${FileUrl}	0
+	Set Global Variable		${LOGIN OP}
+
+Set One Month Of Events
+	${Filelogin}=	Get File	${PATH LOGINS}
+	${Size}=	Get Line Count	${Filelogin}
+	FOR	${k}	IN RANGE	${Size}
+		Set Global Variable	${Organizer}	${k}
+		${log}=	Get Line	${Filelogin}	${Organizer}
+		Open Calendar	${log}
+		Create And Save Events
+		Close Browser
+	END
+*** Keywords ***
+Open Calendar
+	[Documentation]	Open firefox and input credentials in OP
+	[Arguments]	${log}
+	Open browser To Login Page	
+	@{loglist}=	Split String	${log}	|
+	Set Global Variable	@{login}	@{loglist}
+	Input Credentials	${login}[0]	${login}[1]
+	Wait Until Page Contains	Spam
+	Go To	${LOGIN OP}
+	Wait Until Element Is Visible	jquery:.waves-effect.waves-light.btn-accent
+
+Create And Save Events
+	[Documentation]	Create all the events of the month taken as an input
+	${number of days}=	Evaluate	calendar.monthrange(${YEAR}, ${MONTH})[1]
+	${is ampm}=	Run Keyword And Return Status	Page Should Contain	12:00 PM
+	Set Global Variable	${is ampm}
+	FOR    ${day}    IN RANGE    ${DAY}	${number of days}+1
+		Continue For Loop If	datetime.date(${YEAR}, ${MONTH}, ${day}).weekday()>4
+		Create Events Of A Day	${day}	${MONTH}
+	END
+
+Open Browser To Login Page
+	Open Browser	${LOGIN OP}	
+	Wait Until Element Is Visible	user
+
+Input Credentials
+	[Arguments]	${username}	${password}
+	Input Text	user	${username}
+	Input Password	password	${password}
+	Click Button    jquery:button.btn.btn-success
+
+Get Date
+	[Arguments]	${B month}	${E month}
+	${month} = 	Evaluate 	random.randint(${B month}, ${E month})
+	${day}=		Evaluate	random.randint(1, 31)
+	${dayp}=	Evaluate	random.randint(1, 28)
+	Run Keyword If	$month==2	Set Local Variable	${day}	${dayp}
+	${dayp}=	Evaluate	random.randint(1, 30)
+	Run Keyword If	$month in [4,6,9,11]	Set Local Variable	${day}	${dayp}
+	[Return]	${day}	${month}
+
+Set Date
+	[Arguments]	${day}	${month}
+	${raw Date}=	Evaluate	datetime.datetime(${YEAR},${month},${day})
+	${Date}=	Convert Date	${raw Date}	result_format=%a %Y/%m/%d
+	Input Text	jquery:.input.form-control.date:first	${Date}
+
+
+Get AMPM Hour
+	[Documentation]	Convert a 24h format in 12h (considering only day time)
+	[Arguments]	${hour}
+	${hour prime}=	Evaluate	${hour}-12
+	Run Keyword If	${hour}<12	Set Global Variable	${meridiem}	AM
+	Run Keyword If	${hour}>=12	Set Global Variable	${meridiem}	PM
+	Run Keyword If	${hour}>12	Set Local Variable	${hour}	${hour prime}
+	[Return]	${hour}
+
+Clear Hour
+	[Arguments]	${query}
+	Click Element	jquery:${query}
+	Press Keys	None	CTRL+A
+	Press Keys	None	DELETE
+
+Get Hour
+	[Arguments]	${hour}						#format 13.75
+	${ampm hour}=	Get AMPM Hour	${hour}				#format 1.75 (PM)
+	${real hour}=	Set Variable If	${is ampm}	${ampm hour}	${hour}
+	${real hour}=	Convert Time	${real hour} hours	timer	#format 1:45 (PM) or 13:45
+	${real hour}=	Get Substring	${real hour}	0	5
+	${input hour}=	Set Variable If	${is ampm}	${real hour} ${meridiem}	${real hour}
+	[Return]	${input hour}
+
+Set Hour
+	[Documentation]	Set the hour of the event
+	[Arguments]	${possible debut hour}
+	${hour of beg}=	Evaluate	random.randint(${possible debut hour},${possible debut hour}+1)
+	${quarter of beg}=	Evaluate	random.randint(0,3)/4
+
+	${beginning}=	Evaluate	${hour of beg}+${quarter of beg}
+	${input hour}=	Get Hour	${beginning}
+
+	Clear Hour	[ng-model='ctrl.start']:last
+	Input Text	jquery:[ng-model='ctrl.start']:last	${input hour}
+	#Run Keyword If	${is ampm}	Click Button	jquery:.btn-block.clockpicker-button:last
+	Click Element	jquery:.modal-title
+	
+	${duration}=	Evaluate	random.randint(3,10)/4
+
+	${end}=		Evaluate	${beginning}+${duration}
+	${input hour}=	Get Hour	${end}
+
+	Clear Hour	[ng-model='ctrl.end']:last
+	Input Text	jquery:[ng-model='ctrl.end']:last	${input hour}
+	#Run Keyword If	${is ampm}	Click Button	jquery:.btn-block.clockpicker-button:last
+	Click Element	jquery:.modal-title
+	[Return]	${end}
+
+Create Event
+	Click Button	jquery:.waves-effect.waves-light.btn-accent
+	Wait Until Page Contains	No repetition	timeout=10
+	Sleep	0.1
+	${event}=	Get Random Field In File	${PATH NAME}
+	@{name description}=	Split String	${event}	|
+	Input Text	jquery:.event-form .input.title	${name description}[0]
+	Input Text	jquery:[ng-model='editedEvent.description']	${name description}[1]
+
+Set Date and Hour of Event
+	[Documentation]	Set the date and the hour of the event
+	[Arguments]	${day}	${month}	${hour}
+	${next hour}=	Set Hour	${hour}
+	${next hour}=	Evaluate	int(math.ceil(${next hour}))
+	Set Date	${day}	${month}
+	[Return]	${next hour}
+
+Set Details
+	[Documentation]	Set details of the event
+	Input Text	jquery:[ng-model='editedEvent.location']	Paris, France
+	@{email names}=	Get x Random Field In File	${PATH LOGINS}	${Organizer}
+	Input Text	jquery:[type='email']:last	${login}[0],
+	FOR	${email name}	IN	@{email names}
+		@{email}=	Split String	${email name}	|
+		Input Text	jquery:[type='email']:last	${email}[0],
+	END
+	${alarm}=	Evaluate	str(random.randint(2,7))
+	Select From List By Value	jquery:[ng-model="ctrl.trigger"]	${alarm}
+
+Save Event
+	Click Button	jquery:button.btn.btn-primary.save
+	Sleep	0.1
+	Run Keyword And Continue On Failure	Click Button	jquery:.waves-effect:last
+	Run Keyword And Continue On Failure	Click Button	jquery:.close-button
+	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
+	Sleep	0.1
+	Click Button	jquery:.waves-effect.waves-light.btn-accent
+	Wait Until Element Is Enabled	jquery:.close-button
+	Click Button	jquery:.close-button
+	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
+	Sleep	0.1
+
+Create Events Of A Day
+	[Documentation]	Create all (3) events in the given day
+	[Arguments]	${day}	${month}
+	${hour}=	Evaluate	9
+	FOR	${i}	IN RANGE	3
+		Create Event
+		${hour}=	Set Date and Hour of Event	${day}	${month}	${hour}
+		Set Details
+		Save Event
+	END

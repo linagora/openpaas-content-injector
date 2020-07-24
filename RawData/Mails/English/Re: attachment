@@ -1,0 +1,3 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p> I got your email with the attachment.  Let's work together today to get this done <br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

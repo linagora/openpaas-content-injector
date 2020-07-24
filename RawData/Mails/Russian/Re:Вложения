@@ -1,0 +1,9 @@
+<h5>Дорогой {receiver}, </h5>
+<br> 
+<p> Я получил ваше письмо с вложением.  Давайте сегодня поработаем вместе </p>
+<br> 
+<div class="openpaas-signature"> -- 
+<br> 
+<p>{sender}
+<br>электронная почта: 
+<a href="mailto:{senderMail}">{senderMail}</a></p></div>

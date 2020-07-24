@@ -1,0 +1,8 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p>Go ahead and work with {in_copy} to get a new fridge for #8.</p> 
+<br> 
+<p>I am going to try and come down this Saturday.</p> 
+<br> 
+<p>Talk to you later.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

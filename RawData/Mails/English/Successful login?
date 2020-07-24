@@ -1,0 +1,6 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p> Were you able to log in to the online site of the company and find socal today?</p> 
+<br> 
+<p> I will follow up with a list of our physical deals done yesterday and today.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a> </p></div>

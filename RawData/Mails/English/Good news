@@ -1,0 +1,4 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p> I have spoken to Amanda and everything looks good.  Martin Tultz was supposed to email me some language but I did not receive it.  I don't have his # so can you follow up.  When is the estimated closing date.  Let me know what else I need to be doing.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br> email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

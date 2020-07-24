@@ -1,0 +1,6 @@
+<h5>Hello dear {receiver} ,</h5><br> 
+<p> I will respond to the offer on Monday.  There is a $35 Million expansion </p> 
+<p>adding 250 jobs in Burnet.  I am tempted to hold for $3000/acre.  Owner financing would still work.   Do you have an opinion?</p>
+
+<br> <div class=\"openpaas-signature\"> -- <br> 
+<p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

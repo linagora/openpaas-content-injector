@@ -1,0 +1,3 @@
+# WARNING: Suppress the first two lines when done, the file must contain only the data
+#logins, passwords, first and last names of the OpenPaas users (they are supposed to be already created), separated with | as:
+anakin.skywalker@example.com|1234password|Anakin|Skywalker

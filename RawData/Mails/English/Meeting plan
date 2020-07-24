@@ -1,0 +1,4 @@
+<h5>Hello {receiver} ,</h5><br> 
+<p> Can you give me more details or email  the plan prior to meeting?  What do I need to provide besides headcount?</p> 
+<p> Otherwise any afternoon next week would be fine<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

@@ -1,0 +1,4 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p> I am going to be in Seguin this Saturday through Monday.  We can talk about a unit for Wade then.  I will call the bank again today to resolve authorization on the account.  Lets keep the office open until noon on Memorial day.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

@@ -1,0 +1,5 @@
+<h5>Hello dear {receiver} ,</h5><br>
+<p style="color:Tomato;">This is a test email sent from one user to another - looking for emails data.</p>
+<b>Have a nice day,<br></b>
+<br> <div class=\"openpaas-signature\"> -- <br> 
+<p>{sender}</p></div>

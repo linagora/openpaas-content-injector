@@ -1,0 +1,13 @@
+<h5>Hi {receiver}.</h5><br> 
+<p>We appreciate your prompt attention and completing the Team Selection information.</p> 
+<br> 
+<p>Ideally, we needed to receive your team of raters on the Team Selection form we sent you.  The information needed is then easily transferred into the database directly from that Office Calc spreadsheet.  If you do not have the ability to complete that form, inserting what you listed below, we still require additional information.</p> 
+<br> 
+<p>We need each person's email address.  Without the email address, we cannot email them their internet link and ID to provide feedback for you, nor can we send them an automatic reminder via email.  It would also be good to have each person's phone number, in the event we need to reach them.</p> 
+<br> 
+<p>So, we do need to receive that complete TS Office Calc spreadsheet, or if you need to instead, provide the needed information via email.</p> 
+<br> 
+<p>Thank you for your assistance {receiver}.</p> 
+<br> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

@@ -1,0 +1,11 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p>Here is a schedule of the most recent utility bills and the overages.  There are alot of overages.  It will probably get worse this month because of all the cold weather.</p> 
+<br> 
+<p>You need to be very clear with all new tenants about the electricity cap.</p> 
+<p>This needs to be handwritten on all new leases.</p> 
+<br> 
+<p>I am going to fax you copies of the bills that support this spreadsheet.  We also need to write a short letter remind everyone about the cap and the need to conserve energy if they don't want to exceed their cap.  I will write something today.</p> 
+<br> 
+<p>Wait until you have copies of the bills and the letter before you start collecting.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

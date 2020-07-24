@@ -1,0 +1,4 @@
+<h5>Hi {receiver}</h5><br> 
+<p>Hi {receiver}, nice to hear from you again.  I will certainly be in attendance...I do have a one-time a week class on Tuesday night (from 5-8) so I wanted to see if there was a cocktail half-hour or so planned that I could stretch out my arrival slightly.</p> 
+<br> <div class="openpaas-signature"> -- <br> 
+ <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>

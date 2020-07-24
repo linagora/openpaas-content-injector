@@ -1,0 +1,6 @@
+<h5>Dear {receiver} ,</h5><br> 
+<p>I checked into executing my options with Charles Barney.  Bad news.  Our company has an agreement with Hugh Webber that is exclusive.  Employees don't have the choice of where to exercise.  I still would like to get to the premier service account, but I will have to transfer the money. </p> 
+<br>
+<p>Hopefully this will reach you.</p>
+<br> <div class=\"openpaas-signature\"> -- <br> 
+<p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
