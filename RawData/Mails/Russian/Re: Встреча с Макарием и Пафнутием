@@ -1,0 +1,9 @@
+<h5>{receiver},</h5>
+<br>
+<p>Спасибо за помощь.  Это должно сработать, если Макари и Пафнути будут доступны.  Надеемся, что завтра у Лены будут для вас резюме.  Я буду на связи с вами.</p> 
+<br> 
+<div class="openpaas-signature"> -- 
+<br> 
+<p>{sender}
+<br>email: 
+<a href="mailto:{senderMail}">{senderMail}</a></p></div>
