@@ -1,6 +1,7 @@
 import argparse
 import subprocess
 import os
+import Scripts.EmailSending
 
 logPath= os.path.join(os.path.abspath('..'), 'Logs')
 dataPath=os.path.join(os.path.abspath('..'), 'RawData')
@@ -41,7 +42,4 @@ secondScript = ['robot','--outputdir', logPath,
 
 #Execute third script (python): Send emails
 print("Sending emails...")
-thirdScript = ['python3', os.path.join(os.path.abspath('.'), 'EmailSending.py'), parsing.language, parsing.month, parsing.day, parsing.year]
-subprocess.run(thirdScript)
-
-
+eventList = Scripts.EmailSending.main(parsing.language, parsing.month, parsing.day, parsing.year)
