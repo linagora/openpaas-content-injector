@@ -61,3 +61,37 @@ Backup
 	Change x Number In Date	4	${day1}
 	Run Keyword If	${day}%10==0 and ${current.day}<10	Change x Number In Date	5	${day2}
 	
+Save Event
+	Click Button	jquery:button.btn.btn-primary.save
+	Sleep	0.1
+	Run Keyword And Continue On Failure	Click Button	jquery:.waves-effect:last
+	Run Keyword And Continue On Failure	Click Button	jquery:.close-button
+	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
+	Sleep	0.1
+	Click Button	jquery:.waves-effect.waves-light.btn-accent
+	Wait Until Element Is Enabled	jquery:.close-button
+	Click Button	jquery:.close-button
+	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
+	Sleep	0.1
+
+Open Calendar
+	[Documentation]	Open firefox and input credentials in OP
+	[Arguments]	${log}
+	Open browser To Login Page	user
+	@{loglist}=	Split String	${log}	|
+	Set Global Variable	@{login}	@{loglist}
+	Input Credentials	${login}[0]	${login}[1]
+	Wait Until Page Contains	Spam
+	Go To	${LOGIN OP}
+	Wait Until Element Is Visible	jquery:.waves-effect.waves-light.btn-accent
+
+Open Browser To Login Page
+	[Arguments]		${wait}
+	Open Browser	${LOGIN OP}	
+	Wait Until Element Is Visible	${wait}
+
+Input Credentials
+	[Arguments]	${username}	${password}
+	Input Text	user	${username}
+	Input Password	password	${password}
+	Click Button    jquery:button.btn.btn-success

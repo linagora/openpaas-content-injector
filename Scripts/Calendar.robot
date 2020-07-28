@@ -8,7 +8,7 @@ Library    	  	DateTime
 Resource		Ressources.robot
 
 *** Variables ***
-#can/has t obe changed in command line
+#can/has to be changed in command line
 ${LOGIN OP}	https://an_open_pass_site/#/calendar
 
 ${PATH}		../RawData/
@@ -38,17 +38,6 @@ Set One Month Of Events
 		Close Browser
 	END
 *** Keywords ***
-Open Calendar
-	[Documentation]	Open firefox and input credentials in OP
-	[Arguments]	${log}
-	Open browser To Login Page	
-	@{loglist}=	Split String	${log}	|
-	Set Global Variable	@{login}	@{loglist}
-	Input Credentials	${login}[0]	${login}[1]
-	Wait Until Page Contains	Spam
-	Go To	${LOGIN OP}
-	Wait Until Element Is Visible	jquery:.waves-effect.waves-light.btn-accent
-
 Create And Save Events
 	[Documentation]	Create all the events of the month taken as an input
 	${number of days}=	Evaluate	calendar.monthrange(${YEAR}, ${MONTH})[1]
@@ -58,26 +47,6 @@ Create And Save Events
 		Continue For Loop If	datetime.date(${YEAR}, ${MONTH}, ${day}).weekday()>4
 		Create Events Of A Day	${day}	${MONTH}
 	END
-
-Open Browser To Login Page
-	Open Browser	${LOGIN OP}	
-	Wait Until Element Is Visible	user
-
-Input Credentials
-	[Arguments]	${username}	${password}
-	Input Text	user	${username}
-	Input Password	password	${password}
-	Click Button    jquery:button.btn.btn-success
-
-Get Date
-	[Arguments]	${B month}	${E month}
-	${month} = 	Evaluate 	random.randint(${B month}, ${E month})
-	${day}=		Evaluate	random.randint(1, 31)
-	${dayp}=	Evaluate	random.randint(1, 28)
-	Run Keyword If	$month==2	Set Local Variable	${day}	${dayp}
-	${dayp}=	Evaluate	random.randint(1, 30)
-	Run Keyword If	$month in [4,6,9,11]	Set Local Variable	${day}	${dayp}
-	[Return]	${day}	${month}
 
 Set Date
 	[Arguments]	${day}	${month}
@@ -163,19 +132,6 @@ Set Details
 	END
 	${alarm}=	Evaluate	str(random.randint(2,7))
 	Select From List By Value	jquery:[ng-model="ctrl.trigger"]	${alarm}
-
-Save Event
-	Click Button	jquery:button.btn.btn-primary.save
-	Sleep	0.1
-	Run Keyword And Continue On Failure	Click Button	jquery:.waves-effect:last
-	Run Keyword And Continue On Failure	Click Button	jquery:.close-button
-	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
-	Sleep	0.1
-	Click Button	jquery:.waves-effect.waves-light.btn-accent
-	Wait Until Element Is Enabled	jquery:.close-button
-	Click Button	jquery:.close-button
-	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
-	Sleep	0.1
 
 Create Events Of A Day
 	[Documentation]	Create all (3) events in the given day

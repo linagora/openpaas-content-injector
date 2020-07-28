@@ -34,9 +34,9 @@ Open Twake
 	${numberUsers}=	Evaluate	len(${logins})
 	Set Global Variable	${numberUsers}
 	FOR	${Line}	IN	@{logins}
-		Open browser To Login Page
+		Open browser To Login Page	username
 		@{current login}=	Split String	${Line}	|
-		Input Credentials	${current login}[0]	${current login}[1]
+		Input Twake Credentials	${current login}[0]	${current login}[1]
 		Wait Until Element Is Visible	jquery:textarea.input
 		Change Company	${COMPANY NAME}
 	END
@@ -69,11 +69,7 @@ Write Dialogs In Other Channels
 	END
 
 *** Keywords ***
-Open Browser To Login Page
-	Open Browser	${LOGIN URL}	
-	Wait Until Element Is Visible	username
-
-Input Credentials
+Input Twake Credentials
 	[Arguments]	${username}	${password}
 	Input Text	username	${username}
 	Input Password	password	${password}
