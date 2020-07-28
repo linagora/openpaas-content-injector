@@ -13,10 +13,11 @@ Get Random Field In File
 
 Get x Random Field In File
 	[Documentation]	Select random lines in a file
-	[Arguments]	${PATH}	${Exclude}=-1
+	[Arguments]	${PATH}	${Exclude}=-1	${numberp}=-1
 	${Name_ids}=	Get File	${PATH}
 	${Size}=	Get Line Count	${Name_ids}
-	${number}=	Evaluate 	random.randint(1, $Size)
+	${number}=	Evaluate 	random.randint(1, $Size//2 +1)
+	Run Keyword If	${numberp}!=-1	Set Local Variable	${number}	${numberp}
 	@{usedLines}=	Create List	${Exclude}
 	@{lines}=	Create List
 	FOR	${i}	IN RANGE	99
@@ -25,7 +26,7 @@ Get x Random Field In File
 		${line}=	Get Line	${Name_ids}	${random}
 		Run Keyword If	${boolean}	Append To List	${lines}	${line}
 		Run Keyword If	${boolean}	Append To List	${usedLines}	${random}
-		Exit For Loop If	len(${lines})==${number}
+		Exit For Loop If	len(${lines})==min(${number}, ${Size}-1)
 	END
 	[Return]	${lines}
 
@@ -64,7 +65,6 @@ Backup
 Save Event
 	Click Button	jquery:button.btn.btn-primary.save
 	Sleep	0.1
-	Run Keyword And Continue On Failure	Click Button	jquery:.waves-effect:last
 	Run Keyword And Continue On Failure	Click Button	jquery:.close-button
 	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
 	Sleep	0.1

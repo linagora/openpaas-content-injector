@@ -85,7 +85,6 @@ Set Hour
 
 	Clear Hour	[ng-model='ctrl.start']:last
 	Input Text	jquery:[ng-model='ctrl.start']:last	${input hour}
-	#Run Keyword If	${is ampm}	Click Button	jquery:.btn-block.clockpicker-button:last
 	Click Element	jquery:.modal-title
 	
 	${duration}=	Evaluate	random.randint(3,10)/4
@@ -95,7 +94,6 @@ Set Hour
 
 	Clear Hour	[ng-model='ctrl.end']:last
 	Input Text	jquery:[ng-model='ctrl.end']:last	${input hour}
-	#Run Keyword If	${is ampm}	Click Button	jquery:.btn-block.clockpicker-button:last
 	Click Element	jquery:.modal-title
 	[Return]	${end}
 
@@ -104,27 +102,43 @@ Create Event
 	Wait Until Page Contains	No repetition	timeout=10
 	Sleep	0.1
 	${event}=	Get Random Field In File	${PATH NAME}
-	@{name description}=	Split String	${event}	|
-	Input Text	jquery:.event-form .input.title	${name description}[0]
-	Input Text	jquery:[ng-model='editedEvent.description']	${name description}[1]
+	${name}	${description}	@{attribute}=	Split String	${event}	|
+
+	Input Text	jquery:.event-form .input.title	${name}
+	Input Text	jquery:[ng-model='editedEvent.description']	${description}
+	[Return]	${attribute}
 
 Set Date and Hour of Event
 	[Documentation]	Set the date and the hour of the event
-	[Arguments]	${day}	${month}	${hour}
+	[Arguments]	${day}	${month}	${hour}	${attribute}
 	${next hour}=	Set Hour	${hour}
+	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	evening
+	Run Keyword If	${bool}	Set Hour	19
+	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	lunch
+	Run Keyword If	${bool}	Set Hour	12
 	${next hour}=	Evaluate	int(math.ceil(${next hour}))
 	Set Date	${day}	${month}
 	[Return]	${next hour}
 
 Set Details
 	[Documentation]	Set details of the event
+	[Arguments]	${attribute}
 	Input Text	jquery:[ng-model='editedEvent.location']	Paris, France
-	@{email names}=	Get x Random Field In File	${PATH LOGINS}	${Organizer}
+	${num}=	Evaluate	-1
+	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	many
+	Run Keyword If	${bool}	Set Local Variable	${num}	5
+	@{email names}=	Get x Random Field In File	${PATH LOGINS}	${Organizer}	${num}
+	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	alone
+	Run Keyword If	${bool}	Set Local Variable	${email names}	
 	Input Text	jquery:[type='email']:last	${login}[0],
 	FOR	${email name}	IN	@{email names}
 		@{email}=	Split String	${email name}	|
 		Input Text	jquery:[type='email']:last	${email}[0],
 	END
+	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	weekly
+	Run Keyword If	${bool}	Select From List By Value	jquery:[ng-model="vm.freq"]	2
+	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	allday
+	Run Keyword If	${bool}	Click Element	jquery:[ng-model="ctrl.full24HoursDay"]
 	${alarm}=	Evaluate	str(random.randint(2,7))
 	Select From List By Value	jquery:[ng-model="ctrl.trigger"]	${alarm}
 
@@ -133,8 +147,8 @@ Create Events Of A Day
 	[Arguments]	${day}	${month}
 	${hour}=	Evaluate	9
 	FOR	${i}	IN RANGE	3
-		Create Event
-		${hour}=	Set Date and Hour of Event	${day}	${month}	${hour}
-		Set Details
+		${attribute}=	Create Event
+		${hour}=	Set Date and Hour of Event	${day}	${month}	${hour}	${attribute}
+		Set Details	${attribute}
 		Save Event
 	END
