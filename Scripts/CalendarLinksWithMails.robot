@@ -12,7 +12,6 @@ Resource		Ressources.robot
 ${LOGIN OP}	https://an_open_pass_site/#/calendar
 
 ${PATH}		../RawData/
-&{VariableDict}		{'abbey.curry@sandbox.integration-open-paas.org': [{'date': 'Mon 2020/06/29', 'eventName': 'Meeting', 'begHour': '04:00 PM', 'endHour': '06:00 PM'}], 'anderson.waxman@sandbox.integration-open-paas.org': [], 'cornell.able@sandbox.integration-open-paas.org': [], 'dawson.waterfield@sandbox.integration-open-paas.org': [], 'felton.gumper@sandbox.integration-open-paas.org': [], 'grant.big@sandbox.integration-open-paas.org': [], 'nick.derbies@sandbox.integration-open-paas.org': [], 'peter.wilson@sandbox.integration-open-paas.org': [], 'walker.mccallister@sandbox.integration-open-paas.org': []}
 
 
 *** Tasks ***
@@ -28,9 +27,11 @@ Create The Events In The List
 	FOR	${k}	IN RANGE	${Size}
 		Set Global Variable	${Organizer}	${k}
 		${log}=	Get Line	${Filelogin}	${Organizer}
-		Open Calendar	${log}
 		@{cred}=	Split String	${log}	|
-		@{list}=	Get From Dictionary		&{VariableDict}		${cred}[0]
+		@{list}=	Get From Dictionary		${VariableDict}		${cred}[0]
+		${bool}=	Run Keyword And Return Status	Should Be Empty		${list}
+		Continue For Loop If	${bool}
+		Open Calendar	${log}
 		Create And Save Events From List	${list}
 		Close Browser
 	END
@@ -41,7 +42,11 @@ Create And Save Events From List
 	[Arguments]		${list}
 	${is ampm}=	Run Keyword And Return Status	Page Should Contain	12:00 PM
 	Set Global Variable	${is ampm}
-	FOR    ${event}    IN	${list}
+	FOR    ${event}    IN	@{list}
+		${Date}=	Get From Dictionary		${event}	date
+		${Name}=	Get From Dictionary		${event}	eventName
+		${BegHour}=	Get From Dictionary		${event}	begHour
+		${EndHour}=	Get From Dictionary		${event}	endHour
 		Create Formated Event	${Date}		${Name}		${BegHour}	${EndHour}
 	END
 
@@ -68,4 +73,4 @@ Create Formated Event
 	${alarm}=	Evaluate	str(random.randint(2,7))
 	Select From List By Value	jquery:[ng-model="ctrl.trigger"]	${alarm}
 	Input Text	jquery:[ng-model='editedEvent.location']	Paris, France
-	Save Event
+	Click Button	jquery:button.btn.btn-primary.save

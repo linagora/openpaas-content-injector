@@ -77,7 +77,7 @@ Save Event
 Open Calendar
 	[Documentation]	Open firefox and input credentials in OP
 	[Arguments]	${log}
-	Open browser To Login Page	user
+	Open Browser To Login Page	${LOGIN OP}		user
 	@{loglist}=	Split String	${log}	|
 	Set Global Variable	@{login}	@{loglist}
 	Input Credentials	${login}[0]	${login}[1]
@@ -86,8 +86,8 @@ Open Calendar
 	Wait Until Element Is Visible	jquery:.waves-effect.waves-light.btn-accent
 
 Open Browser To Login Page
-	[Arguments]		${wait}
-	Open Browser	${LOGIN OP}	
+	[Arguments]		${LOGIN PAGE}	${wait}
+	Open Browser	${LOGIN PAGE}
 	Wait Until Element Is Visible	${wait}
 
 Input Credentials
@@ -95,3 +95,9 @@ Input Credentials
 	Input Text	user	${username}
 	Input Password	password	${password}
 	Click Button    jquery:button.btn.btn-success
+
+Clear Hour
+	[Arguments]	${query}
+	Click Element	jquery:${query}
+	Press Keys	None	CTRL+A
+	Press Keys	None	DELETE

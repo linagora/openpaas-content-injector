@@ -3,8 +3,8 @@ import subprocess
 import os
 import EmailSending
 
-logPath= os.path.join(os.path.dirname(__file__), os.pardir, 'Logs')
-dataPath= os.path.join(os.path.dirname(__file__), os.pardir, 'RawData')
+logPath= os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'Logs'))
+dataPath= os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'RawData'))
 scriptPath = os.path.abspath(os.path.dirname(__file__))
 FNULL = open(os.devnull, 'w')
 
@@ -56,10 +56,14 @@ for event in eventList:
     org = event['organizer']
     event.pop('organizer')
     eventToCreate[org].append(event)
-print(eventToCreate)
+filePath= os.path.join(dataPath, 'Events', 'EventsFromMails.py')
+newFile = open(filePath, 'w')
+text = 'VariableDict='+str(eventToCreate)
+newFile.write(text)
+newFile.close()
 thirdScript = ['robot','--outputdir', logPath,
                         '--noncritical', 'all',
                         '--variable', f'PATH:{dataPath}', 
-                        '--variable', f'VariableDict:{eventToCreate}',
+                        '--variablefile', filePath,
             os.path.join(scriptPath,'CalendarLinksWithMails.robot')]
 subprocess.run(thirdScript, cwd=logPath, stdout=FNULL)

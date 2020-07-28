@@ -37,6 +37,7 @@ Set One Month Of Events
 		Create And Save Events
 		Close Browser
 	END
+
 *** Keywords ***
 Create And Save Events
 	[Documentation]	Create all the events of the month taken as an input
@@ -63,12 +64,6 @@ Get AMPM Hour
 	Run Keyword If	${hour}>=12	Set Global Variable	${meridiem}	PM
 	Run Keyword If	${hour}>12	Set Local Variable	${hour}	${hour prime}
 	[Return]	${hour}
-
-Clear Hour
-	[Arguments]	${query}
-	Click Element	jquery:${query}
-	Press Keys	None	CTRL+A
-	Press Keys	None	DELETE
 
 Get Hour
 	[Arguments]	${hour}						#format 13.75

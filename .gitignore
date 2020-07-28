@@ -2,3 +2,5 @@ Logs/*
 RawData/Config/logins
 RawData/Config/loginTwake
 RawData/Config/sitesUrl
+RawData/Events/EventsFromMails.py
+*.pyc
