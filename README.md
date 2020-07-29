@@ -14,7 +14,7 @@ sudo apt update
 sudo apt install python3.8
 ```
 
-### Install RobotFramework
+### Install RobotFramework and the other python dependencies
 In order to install Robotframework and Selenium you will need to have [pip](http://pip-installer.org) installed and then install them with
 ```
 pip install robotframework
@@ -27,7 +27,20 @@ pip install webdrivermanager
 webdrivermanager firefox --linkpath /usr/local/bin
 ```
 
+You will also need two linshare packages :
+```
+pip install linshareapi
+pip install linsharecli
+```
+
 ## Running the script
+### Clone the repository
+You can clone the repository with
+```
+git clone https://github.com/linagora/openpaas-content-injector.git
+cd openpaas-content-injector
+```
+
 ### Set up
 You will first need to rename the three files `logins.dist`, `loginTwake.dist` and `sitesUrl.dist` in the `RawData/Config` folder by removing the `.dist` and then complete them, with the data you will use (logins and urls of the OpenPaas different sites).
 

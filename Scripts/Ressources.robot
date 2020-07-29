@@ -65,12 +65,11 @@ Backup
 Save Event
 	Click Button	jquery:button.btn.btn-primary.save
 	Sleep	0.1
-	Run Keyword And Continue On Failure	Click Button	jquery:.close-button
-	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
+	Run Keyword And Continue On Failure	Click Button	jquery:.waves-effect:last
 	Sleep	0.1
-	Click Button	jquery:.waves-effect.waves-light.btn-accent
-	Wait Until Element Is Enabled	jquery:.close-button
-	Click Button	jquery:.close-button
+	Run Keyword And Continue On Failure	Click Button	jquery:button.btn.btn-primary.save
+	Run Keyword And Continue On Failure	Click Button	jquery:.close-button
+	Reload Page
 	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
 	Sleep	0.1
 
