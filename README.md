@@ -46,19 +46,19 @@ You will first need to rename the three files `logins.dist`, `loginTwake.dist` a
 
 
 ### Launch all the scripts
-Once the repository cloned, you can launch all the scripts, giving the required arguments : language, month, day and year with 
+Once the repository cloned, you can launch all the scripts, giving the required arguments : language, month, day and year with (Warning, give the numbered args without any `0` in front of it : you must write `7` and no `07`)
 ```
-python3 Scripts/Metascript.py English 07 14 2020
+python3 Scripts/Metascript.py English 7 14 2020
 ```
 
 ### Launch one script
 You can also launch only one script with Python or Robotframework depending on which one you want. With Python3:
 ```
-python3 Scripts/EmailSending.py English 07 14 2020
+python3 Scripts/EmailSending.py Russian 7 14 2020
 ```
 And with Robotframework:
 ```
 robot --noncritical all --outputdir ./Logs --variable LANGUAGE:Russian Scripts/Twake.robot
-robot --noncritical all --outputdir ./Logs --variable LANGUAGE:Russian --variable PATH:./RawData --variable MONTH:07 --variable DAY:14 --variable YEAR:2020 Scripts/Twake.robot
+robot --noncritical all --outputdir ./Logs --variable LANGUAGE:English --variable PATH:./RawData --variable MONTH:6 --variable DAY:29 --variable YEAR:2020 Scripts/Calendar.robot
 ```
 
