@@ -4,6 +4,7 @@ Library         OperatingSystem
 Library		  	SeleniumLibrary
 Library		 	String
 Library		  	Collections
+Library			ParsingForRf.py
 Resource		Ressources.robot
 
 *** Variables ***
@@ -19,24 +20,26 @@ ${COMPANY NAME}	Test
 
 *** Tasks ***
 Set Variables
-	${FileUrl}=	Get File	${PATH}/Config/sitesUrl
-	${LOGIN URL}=	Get Line	${FileUrl}	1
+	Parse A File	${PATH}/Config/sitesUrl
+	${LOGIN URL}=	Get Item	Twake	url
 	Set Global Variable		${LOGIN URL}
-	${COMPANY NAME}=	Get Line	${FileUrl}	2
+	${COMPANY NAME}=	Get Item	Twake	company_name
 	Set Global Variable		${COMPANY NAME}
 
 Open Twake
 	[Tags]	all
 	[Documentation]	Open firefox and input credentials
-	${Login}=	Get File	${PATH}/Config/loginTwake
-	@{logins}=	Split To Lines	${Login}
+	Reinitialize Parser
+	Parse A File	${PATH}/Config/loginTwake
+	@{logins}=	Get Sections List
 	Set Global Variable	${logins}
 	${numberUsers}=	Evaluate	len(${logins})
 	Set Global Variable	${numberUsers}
-	FOR	${Line}	IN	@{logins}
+	FOR	${name}	IN	@{logins}
 		Open Browser To Login Page	${LOGIN URL}	username
-		@{current login}=	Split String	${Line}	|
-		Input Twake Credentials	${current login}[0]	${current login}[1]
+		${log}=		Get Item	${name}	login
+		${password}=	Get Item	${name}	password
+		Input Twake Credentials	${log}	${password}
 		Wait Until Element Is Visible	jquery:textarea.input
 		Change Company	${COMPANY NAME}
 	END

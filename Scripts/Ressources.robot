@@ -11,19 +11,20 @@ Get Random Field In File
 	${line}=	Get Line	${Name_ids}	${random}
 	[Return]	${line}
 
+
 Get x Random Field In File
-	[Documentation]	Select random lines in a file
-	[Arguments]	${PATH}	${Exclude}=-1	${numberp}=-1
-	${Name_ids}=	Get File	${PATH}
-	${Size}=	Get Line Count	${Name_ids}
+	[Documentation]	Select random lines in the currently parsed file
+	[Arguments]	${Exclude}=-1	${numberp}=-1
+	${logins}=	Get Sections List
+	${Size}=	Evaluate	len(${logins})
 	${number}=	Evaluate 	random.randint(1, $Size//2 +1)
 	Run Keyword If	${numberp}!=-1	Set Local Variable	${number}	${numberp}
 	@{usedLines}=	Create List	${Exclude}
 	@{lines}=	Create List
 	FOR	${i}	IN RANGE	99
-		${random} = 	Evaluate 	random.randint(0, $Size-1)
+		${random}= 	Evaluate 	random.randint(0, $Size-1)
 		${boolean}=	Run Keyword And Return Status	List Should Not Contain Value	${usedLines}	${random}
-		${line}=	Get Line	${Name_ids}	${random}
+		${line}=	Get Item	${logins}[${random}]	login
 		Run Keyword If	${boolean}	Append To List	${lines}	${line}
 		Run Keyword If	${boolean}	Append To List	${usedLines}	${random}
 		Exit For Loop If	len(${lines})==min(${number}, ${Size}-1)
@@ -77,9 +78,10 @@ Open Calendar
 	[Documentation]	Open firefox and input credentials in OP
 	[Arguments]	${log}
 	Open Browser To Login Page	${LOGIN OP}		user
-	@{loglist}=	Split String	${log}	|
-	Set Global Variable	@{login}	@{loglist}
-	Input Credentials	${login}[0]	${login}[1]
+	${name}=	Get Item	${log}	login
+	${password}=	Get Item	${log}	password
+	Set Global Variable	${login}	${name}
+	Input Credentials	${name}	${password}
 	Wait Until Page Contains	Spam
 	Go To	${LOGIN OP}
 	Wait Until Element Is Visible	jquery:.waves-effect.waves-light.btn-accent

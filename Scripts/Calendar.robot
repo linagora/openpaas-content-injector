@@ -5,6 +5,7 @@ Library		  	SeleniumLibrary
 Library		  	String
 Library		  	Collections
 Library    	  	DateTime
+Library			ParsingForRf.py
 Resource		Ressources.robot
 
 *** Variables ***
@@ -23,16 +24,18 @@ ${meridiem}	AM
 Set Variables
 	Set Global Variable	${PATH NAME}	${PATH}/Events/${LANGUAGE}_Name_events
 	Set Global Variable	${PATH LOGINS}	${PATH}/Config/logins
-	${FileUrl}=	Get File	${PATH}/Config/sitesUrl
-	${LOGIN OP}=	Get Line	${FileUrl}	0
+	Parse A File	${PATH}/Config/sitesUrl
+	${LOGIN OP}=	Get Item	Calendar	url
 	Set Global Variable		${LOGIN OP}
 
 Set One Month Of Events
-	${Filelogin}=	Get File	${PATH LOGINS}
-	${Size}=	Get Line Count	${Filelogin}
+	Reinitialize Parser
+	Parse A File	${PATH LOGINS}
+    ${logins}=	Get Sections List
+	${Size}=	Evaluate	len(${logins})
 	FOR	${k}	IN RANGE	${Size}
 		Set Global Variable	${Organizer}	${k}
-		${log}=	Get Line	${Filelogin}	${Organizer}
+		${log}=	Get From List	${logins}	${k}
 		Open Calendar	${log}
 		Create And Save Events
 		Close Browser
@@ -124,16 +127,15 @@ Set Details
 	[Documentation]	Set details of the event
 	[Arguments]	${attribute}
 	Input Text	jquery:[ng-model='editedEvent.location']	Paris, France
-	${num}=	Evaluate	-1
+	${num}=		Evaluate	-1
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	many
 	Run Keyword If	${bool}	Set Local Variable	${num}	5
-	@{email names}=	Get x Random Field In File	${PATH LOGINS}	${Organizer}	${num}
+	@{email names}=	Get x Random Field In File	${Organizer}	${num}
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	alone
 	Run Keyword If	${bool}	Set Local Variable	${email names}	
-	Input Text	jquery:[type='email']:last	${login}[0],
+	Input Text	jquery:[type='email']:last	${login},
 	FOR	${email name}	IN	@{email names}
-		@{email}=	Split String	${email name}	|
-		Input Text	jquery:[type='email']:last	${email}[0],
+		Input Text	jquery:[type='email']:last	${email name},
 	END
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	weekly
 	Run Keyword If	${bool}	Select From List By Value	jquery:[ng-model="vm.freq"]	2

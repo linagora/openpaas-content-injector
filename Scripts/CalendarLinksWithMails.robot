@@ -5,6 +5,7 @@ Library		  	SeleniumLibrary
 Library		  	String
 Library		  	Collections
 Library    	  	DateTime
+Library			ParsingForRf.py
 Resource		Ressources.robot
 
 *** Variables ***
@@ -16,19 +17,21 @@ ${PATH}		../RawData/
 
 *** Tasks ***
 Set Variables
-	${FileUrl}=	Get File	${PATH}/Config/sitesUrl
 	Set Global Variable	${PATH LOGINS}	${PATH}/Config/logins
-	${LOGIN OP}=	Get Line	${FileUrl}	0
+	Parse A File	${PATH}/Config/sitesUrl
+	${LOGIN OP}=	Get Item	Calendar	url
 	Set Global Variable		${LOGIN OP}
 
 Create The Events In The List
-	${Filelogin}=	Get File	${PATH LOGINS}
-	${Size}=	Get Line Count	${Filelogin}
+	Reinitialize Parser
+	Parse A File	${PATH LOGINS}
+    ${logins}=	Get Sections List
+	${Size}=	Evaluate	len(${logins})
 	FOR	${k}	IN RANGE	${Size}
 		Set Global Variable	${Organizer}	${k}
-		${log}=	Get Line	${Filelogin}	${Organizer}
-		@{cred}=	Split String	${log}	|
-		@{list}=	Get From Dictionary		${VariableDict}		${cred}[0]
+		${log}=	Get From List	${logins}	${k}
+		${email}=	Get Item	${log}	login
+		@{list}=	Get From Dictionary		${VariableDict}		${email}
 		${bool}=	Run Keyword And Return Status	Should Be Empty		${list}
 		Continue For Loop If	${bool}
 		Open Calendar	${log}

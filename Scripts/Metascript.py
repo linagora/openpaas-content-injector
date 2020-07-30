@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+
 import argparse
 import subprocess
 import os
+import configparser
 import EmailSending
 
 logPath= os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'Logs'))
@@ -46,12 +49,13 @@ print("Sending emails...")
 eventList = EmailSending.main(parsing.language, parsing.month, parsing.day, parsing.year)
 
 eventToCreate = {}
-cred = open(os.path.join(dataPath, 'Config', 'logins'))
-credentials = cred.read()
-logins = credentials.splitlines()
+cred = configparser.ConfigParser()
+cred.read(os.path.join(dataPath, 'Config', 'logins'))
+
+logins = cred.sections()
 for l in logins:
-    eventToCreate.update({l.split('|')[0]:[]})
-cred.close()
+    eventToCreate.update({cred[l]['login']:[]})
+
 for event in eventList:
     org = event['organizer']
     event.pop('organizer')
