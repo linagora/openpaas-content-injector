@@ -5,6 +5,7 @@ import subprocess
 import os
 import configparser
 import EmailSending
+import Linshare
 
 logPath= os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'Logs'))
 dataPath= os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'RawData'))
@@ -62,7 +63,7 @@ for event in eventList:
     eventToCreate[org].append(event)
 filePath= os.path.join(dataPath, 'Events', 'EventsFromMails.py')
 newFile = open(filePath, 'w')
-text = 'VariableDict='+str(eventToCreate)
+text = 'VariableDict=' + str(eventToCreate)
 newFile.write(text)
 newFile.close()
 thirdScript = ['robot','--outputdir', logPath,
@@ -71,3 +72,7 @@ thirdScript = ['robot','--outputdir', logPath,
                         '--variablefile', filePath,
             os.path.join(scriptPath,'CalendarLinksWithMails.robot')]
 subprocess.run(thirdScript, cwd=logPath, stdout=FNULL)
+
+#Execute the fourth script (python): Fill Linshare
+print("Filling Linshare")
+Linshare.main(parsing.language)
