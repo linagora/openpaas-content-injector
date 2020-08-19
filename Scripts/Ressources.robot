@@ -16,18 +16,15 @@ Get x Random Field In File
 	[Documentation]	Select random lines in the currently parsed file
 	[Arguments]	${Exclude}=-1	${numberp}=-1
 	${logins}=	Get Sections List
+	Run Keyword If	${Exclude}!=-1	Evaluate	${logins}.pop(${Exclude})
 	${Size}=	Evaluate	len(${logins})
 	${number}=	Evaluate 	random.randint(1, $Size//2 +1)
 	Run Keyword If	${numberp}!=-1	Set Local Variable	${number}	${numberp}
-	@{usedLines}=	Create List	${Exclude}
+	@{linesNumbers}=	Evaluate	random.sample(${logins}, min(${number}, ${Size}-1))
 	@{lines}=	Create List
-	FOR	${i}	IN RANGE	99
-		${random}= 	Evaluate 	random.randint(0, $Size-1)
-		${boolean}=	Run Keyword And Return Status	List Should Not Contain Value	${usedLines}	${random}
-		${line}=	Get Item	${logins}[${random}]	login
-		Run Keyword If	${boolean}	Append To List	${lines}	${line}
-		Run Keyword If	${boolean}	Append To List	${usedLines}	${random}
-		Exit For Loop If	len(${lines})==min(${number}, ${Size}-1)
+	FOR	${lineNumber}	IN	@{linesNumbers}
+		${line}=	Get Item	${logins}[${lineNumber}]	mail
+		Append To List	${lines}	${line}
 	END
 	[Return]	${lines}
 
@@ -78,7 +75,7 @@ Open Calendar
 	[Documentation]	Open firefox and input credentials in OP
 	[Arguments]	${log}
 	Open Browser To Login Page	${LOGIN OP}		user
-	${name}=	Get Item	${log}	login
+	${name}=	Get Item	${log}	mail
 	${password}=	Get Item	${log}	password
 	Set Global Variable	${login}	${name}
 	Input Credentials	${name}	${password}

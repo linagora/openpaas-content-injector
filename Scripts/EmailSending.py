@@ -201,7 +201,7 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
     logins = cred.sections()
 
     listMessages = os.listdir(os.path.join(dataPath, 'Mails', language))
-    listAttachments = os.listdir(os.path.join(dataPath, 'Mails', 'Attachments', language))
+    listAttachments = os.listdir(os.path.join(dataPath, 'Linshare', 'Files', language))
     d = int(day)
     m = int(month)
     y = int(year)
@@ -250,8 +250,11 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
                     receiver = cred[logins[rec]]
                     realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender], senderMail = cred[logins[sender]]['mail'])
                     receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
-                    fileName = listAttachments[random.randrange(len(listAttachments))]
-                    filePath = os.path.join(dataPath, 'Mails','Attachments', language, fileName)
+                    if len(attribute) > 1:
+                        fileName = attribute[1]
+                    else:
+                        fileName = listAttachments[random.randrange(len(listAttachments))]
+                    filePath = os.path.join(dataPath, 'Linshare','Files', language, fileName)
                     attachments.append(uploadFile(filePath))
 
                 elif 'event' in attribute:
