@@ -1,6 +1,15 @@
-# WARNING: Suppress the first two lines when done, the file must contain only the data
-# urls of the sites used by the scripts in the following order : OP Calendar, Twake, Twake company name, jmap server
-https://openpaas.example.org/#/calendar
-https://example.twake.app/
-Company Name
-https://jmap.openpass.example.org/
+# urls of the sites (and name of the Twake company) used by the scripts : OP Calendar, Twake, jmap server, Linshare
+
+
+[Calendar]
+url : https://openpaas.example.org/#/calendar
+
+[Twake]
+url : https://example.twake.app/
+company_name : Company Name
+
+[Email]
+url : https://jmap.openpass.example.org/
+
+[Linshare]
+url : https://linshare-external.example.open-paas.org/

@@ -216,9 +216,8 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
 
                 #Select an email:
                 messageName = listMessages[random.randrange(len(listMessages))]
-                messageFile = open(os.path.join(dataPath, 'Mails', language, messageName))
-                message = messageFile.read()
-                messageFile.close()
+                with open(os.path.join(dataPath, 'Mails', language, messageName)) as messageFile:
+                    message = messageFile.read()
                 subject, *attribute = messageName.split('_')
 
                 
@@ -232,25 +231,25 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
                     receiver = cred[logins[rec]]
                     copy = cred[logins[cop]]
                     realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender],
-                                                senderMail = cred[logins[sender]]['login'], in_copy = copy['first_name'])
-                    receivers = [{'email' : receiver['login'], 'name' : logins[rec]}]
-                    cc = [{'email' : copy['login'], 'name' : logins[cop]}]
+                                                senderMail = cred[logins[sender]]['mail'], in_copy = copy['first_name'])
+                    receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
+                    cc = [{'email' : copy['mail'], 'name' : logins[cop]}]
                 
                 elif 'many' in attribute:
                     sender, *rec = random.sample(range(len(logins)), len(logins))
                     receivers = []
                     realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender],
-                                                senderMail = cred[logins[sender]]['login'])
+                                                senderMail = cred[logins[sender]]['mail'])
                     for j in rec:
                         temp = cred[logins[j]]
-                        receivers.append({'email' : temp['login'], 'name' : logins[j]})
+                        receivers.append({'email' : temp['mail'], 'name' : logins[j]})
                     print(logins[sender], ' to ', str([logins[i] for i in rec]))
 
                 elif 'attach' in attribute:
                     sender, rec = random.sample(range(len(logins)), 2)
                     receiver = cred[logins[rec]]
-                    realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender], senderMail = cred[logins[sender]]['login'])
-                    receivers = [{'email' : receiver['login'], 'name' : logins[rec]}]
+                    realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender], senderMail = cred[logins[sender]]['mail'])
+                    receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
                     fileName = listAttachments[random.randrange(len(listAttachments))]
                     filePath = os.path.join(dataPath, 'Mails','Attachments', language, fileName)
                     attachments.append(uploadFile(filePath))
@@ -262,20 +261,20 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
                     _, eventName, weekday, hours = attribute
                     eventDate, hour1, hour2 = calculDate(sendingDate, weekday, hours)
                     realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender],
-                                                senderMail = cred[logins[sender]]['login'], eventDate = eventDate.strftime("%A %d."))
-                    receivers = [{'email' : receiver['login'], 'name' : logins[rec]}]
+                                                senderMail = cred[logins[sender]]['mail'], eventDate = eventDate.strftime("%A %d."))
+                    receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
                     eventList.append({'date' : eventDate.strftime("%a %Y/%m/%d"), 'eventName' : eventName,
                                     'begHour' : hour1, 'endHour' : hour2, 'organizer' : mail})
                     
                 else:
                     sender, rec = random.sample(range(len(logins)), 2)
                     receiver = cred[logins[rec]]
-                    realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender], senderMail = cred[logins[sender]]['login'])
-                    receivers=[{'email' : receiver['login'], 'name' : logins[rec]}]
+                    realMessage = message.format(receiver = receiver['first_name'], sender = logins[sender], senderMail = cred[logins[sender]]['mail'])
+                    receivers=[{'email' : receiver['mail'], 'name' : logins[rec]}]
 
                 #Set tokens for the corresponding login
                 send = cred[logins[sender]]
-                mail, passw = send['login'], send['password']
+                mail, passw = send['mail'], send['password']
                 setTokens(mail, passw)
                 
                 if not 'many' in attribute:

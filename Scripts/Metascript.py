@@ -54,7 +54,7 @@ cred.read(os.path.join(dataPath, 'Config', 'logins'))
 
 logins = cred.sections()
 for l in logins:
-    eventToCreate.update({cred[l]['login']:[]})
+    eventToCreate.update({cred[l]['mail']:[]})
 
 for event in eventList:
     org = event['organizer']
