@@ -14,9 +14,10 @@ ${LOGIN URL}	https://web_adress_of_twake
 ${PATH}		../RawData
 ${LANGUAGE}	English			#can either be Russian or English, set `--variable LANGUAGE:Russian` in the options of the robot call
 ${NB OF MESSAGES}	${3}
+${COMPANY NAME}		Test
+${workspaceName}	Main Workspace
 
 ${ALIAS USER}	${1}
-${COMPANY NAME}	Test
 
 *** Tasks ***
 Set Variables
@@ -47,7 +48,7 @@ Open Twake
 Write Dialogs In General And Random Channels
 	[Documentation]	Write the desired number of dialogs in default channels
 	[Tags]	all
-	Create Workspace
+	Create Workspace	${workspaceName}
 	FOR	${i}	IN RANGE	1	6
 		Switch Browser	${i}
 		Select Created Channel	first
@@ -90,16 +91,16 @@ Change Company
 
 Create Workspace
 	[Documentation]	Create a new workspace in the current company
+	[Arguments]	${workspaceName}
 	Switch Browser	${1}
 	Wait Until Element Is Visible	jquery:.workspace.workspaceadd
 	Click Element	jquery:.workspace.workspaceadd
-	${workspaceName}=	Generate Random String
 	Input Text	jquery:.input	${workspaceName}
 	Click Button	jquery:.button
 	FOR	${index}	IN RANGE	1	len(@{logins})
-		${log}=		Get From List	${logins}	${index}
-		@{current login}=	Split String	${log}	|
-		Input Text	jquery:.input:last	${current login}[0]
+		${name}=	Get From List	${logins}	${index}
+		${log}=		Get Item	${name}	login
+		Input Text	jquery:.input:last	${log}
 	END
 	Click Button	jquery:.button
 	Wait Until Element Is Visible	jquery:textarea.input	timeout=10

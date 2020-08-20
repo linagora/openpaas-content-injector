@@ -243,7 +243,6 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
                     for j in rec:
                         temp = cred[logins[j]]
                         receivers.append({'email' : temp['mail'], 'name' : logins[j]})
-                    print(logins[sender], ' to ', str([logins[i] for i in rec]))
 
                 elif 'attach' in attribute:
                     sender, rec = random.sample(range(len(logins)), 2)
@@ -267,7 +266,7 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
                                                 senderMail = cred[logins[sender]]['mail'], eventDate = eventDate.strftime("%A %d."))
                     receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
                     eventList.append({'date' : eventDate.strftime("%a %Y/%m/%d"), 'eventName' : eventName,
-                                    'begHour' : hour1, 'endHour' : hour2, 'organizer' : mail})
+                                    'begHour' : hour1, 'endHour' : hour2, 'organizer' : cred[logins[sender]]['mail']})
                     
                 else:
                     sender, rec = random.sample(range(len(logins)), 2)
@@ -279,9 +278,6 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
                 send = cred[logins[sender]]
                 mail, passw = send['mail'], send['password']
                 setTokens(mail, passw)
-                
-                if not 'many' in attribute:
-                    print(logins[sender], ' to ', logins[rec])
 
                 outboxId = getOutboxID()
 
@@ -292,3 +288,13 @@ def main(language:str, month:str, day:str, year:str, mailADay:int = 2) -> list(d
 
                         
     return eventList
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("language")
+    parser.add_argument("month")
+    parser.add_argument("day")
+    parser.add_argument("year")
+    parsing = parser.parse_args()
+    main(parsing.language, parsing.month, parsing.day, parsing.year)
