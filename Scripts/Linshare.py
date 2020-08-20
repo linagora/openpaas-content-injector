@@ -6,6 +6,7 @@ import os
 import sys
 import configparser
 import random
+import argparse
 
 
 dataPath = os.path.join(os.path.dirname(__file__), os.pardir, 'RawData')
@@ -173,3 +174,10 @@ def main(language:str):
         others = list(logins)
         others.remove(log)
         upshare(log, filePath, random.sample(others, random.randint(1,3)))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("language")
+    parsing = parser.parse_args()
+    main(parsing.language)
