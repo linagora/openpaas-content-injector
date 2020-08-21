@@ -1,4 +1,40 @@
-***Keywords***
+*** Variables ***
+#locator variables
+# For Calendar:
+${event_date_locator}	.input.form-control.date:first
+${first_hour_locator}	[ng-model='ctrl.start']:last
+${end_hour_locator}		[ng-model='ctrl.end']:last
+${modal_title_locator}	.modal-title
+${creation_button}		.waves-effect.waves-light.btn-accent
+${event_title_locator}	.event-form .input.title
+${event_descripion_locator}	[ng-model='editedEvent.description']
+${event_location_locator}	[ng-model='editedEvent.location']
+${email_locator}		[type='email']:last
+${frequence_locator}	[ng-model="vm.freq"]
+${full_day_locator}		[ng-model="ctrl.full24HoursDay"]
+${alarm_locator}		[ng-model="ctrl.trigger"]
+${save_button_locator}	button.btn.btn-primary.save
+${last_button}		.waves-effect:last
+${close_button}		.close-button
+${credentials_button}	button.btn.btn-success
+
+#For Twake:
+${textarea_locator}	textarea.input
+${company_logo}		.current_company_logo
+${add_workspace_locator}	.workspace.workspaceadd
+${input_locator}	.input
+${button_locator}	.button
+${select_channel_locator}	.fade_in.extra-margin:
+${open_answer_locator}		.action_link.add_response:last
+${message_flex_locator}		.messages_flex .full_width
+${send_answer_locator}		button.button.small.right-margin
+${send_text_locator}		button.button.medium.primary
+${plus_locator}		.uil-plus-circle:first
+${channel_input_locator}	input.full_width.medium
+${create_channel_locator}	button.button.small.primary-text
+${confirm_channel_locator}	button.button.small.primary
+
+*** Keywords ***
 Get Random Field In File
 	[Documentation]	Select a random line in a file
 	[Arguments]	${PATH}	${Exclude}=-1
@@ -61,14 +97,14 @@ Backup
 	Run Keyword If	${day}%10==0 and ${current.day}<10	Change x Number In Date	5	${day2}
 	
 Save Event
-	Click Button	jquery:button.btn.btn-primary.save
+	Click Button	jquery:${save_button_locator}
 	Sleep	0.1
-	Run Keyword And Continue On Failure	Click Button	jquery:.waves-effect:last
+	Run Keyword And Continue On Failure	Click Button	jquery:${last_button}
 	Sleep	0.1
-	Run Keyword And Continue On Failure	Click Button	jquery:button.btn.btn-primary.save
-	Run Keyword And Continue On Failure	Click Button	jquery:.close-button
+	Run Keyword And Continue On Failure	Click Button	jquery:${save_button_locator}
+	Run Keyword And Continue On Failure	Click Button	jquery:${close_button}
 	Reload Page
-	Wait Until Element Is Enabled	jquery:.waves-effect.waves-light.btn-accent
+	Wait Until Element Is Enabled	jquery:${creation_button}
 	Sleep	0.1
 
 Open Calendar
@@ -81,7 +117,7 @@ Open Calendar
 	Input Credentials	${name}	${password}
 	Wait Until Page Contains	Spam
 	Go To	${LOGIN OP}
-	Wait Until Element Is Visible	jquery:.waves-effect.waves-light.btn-accent
+	Wait Until Element Is Visible	jquery:${creation_button}
 
 Open Browser To Login Page
 	[Arguments]		${LOGIN PAGE}	${wait}
@@ -92,7 +128,7 @@ Input Credentials
 	[Arguments]	${username}	${password}
 	Input Text	user	${username}
 	Input Password	password	${password}
-	Click Button    jquery:button.btn.btn-success
+	Click Button    jquery:${credentials_button}
 
 Clear Hour
 	[Arguments]	${query}
