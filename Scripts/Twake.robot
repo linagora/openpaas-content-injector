@@ -41,9 +41,12 @@ Open Twake
 		${log}=		Get Item	${name}	login
 		${password}=	Get Item	${name}	password
 		Input Twake Credentials	${log}	${password}
-		Wait Until Element Is Visible	jquery:textarea.input
+		Wait Until Element Is Visible	jquery:${textarea_locator}
 		Change Company	${COMPANY NAME}
 	END
+
+Close Twake
+	Close All Browsers
 
 Write Dialogs In General And Random Channels
 	[Documentation]	Write the desired number of dialogs in default channels
@@ -82,28 +85,28 @@ Input Twake Credentials
 Change Company
 	[Documentation]	Change to the given company
 	[Arguments]	${companyName}
-	Wait Until Element Is Visible	jquery:.current_company_logo
+	Wait Until Element Is Visible	jquery:${company_logo}
 	${shortName}=	Get Substring	${companyName}	0	6
 	${todo}=	Run Keyword And Return Status	Page Should Not Contain	${shortName}
-	Run Keyword If	${todo}	Click Element	jquery:.current_company_logo
+	Run Keyword If	${todo}	Click Element	jquery:${company_logo}
 	Run Keyword If	${todo}	Click Element	jquery:div:contains(${COMPANY NAME}):last
-	Wait Until Element Is Visible	jquery:textarea.input
+	Wait Until Element Is Visible	jquery:${textarea_locator}
 
 Create Workspace
 	[Documentation]	Create a new workspace in the current company
 	[Arguments]	${workspaceName}
 	Switch Browser	${1}
-	Wait Until Element Is Visible	jquery:.workspace.workspaceadd
-	Click Element	jquery:.workspace.workspaceadd
-	Input Text	jquery:.input	${workspaceName}
-	Click Button	jquery:.button
+	Wait Until Element Is Visible	jquery:${add_workspace_locator}
+	Click Element	jquery:${add_workspace_locator}
+	Input Text	jquery:${input_locator}	${workspaceName}
+	Click Button	jquery:${button_locator}
 	FOR	${index}	IN RANGE	1	len(@{logins})
 		${name}=	Get From List	${logins}	${index}
 		${log}=		Get Item	${name}	login
-		Input Text	jquery:.input:last	${log}
+		Input Text	jquery:${input_locator}:last	${log}
 	END
-	Click Button	jquery:.button
-	Wait Until Element Is Visible	jquery:textarea.input	timeout=10
+	Click Button	jquery:${button_locator}
+	Wait Until Element Is Visible	jquery:${textarea_locator}	timeout=10
 	FOR	${i}	IN RANGE	2	6
 		Switch Browser	${i}
 		Change Channel	${workspaceName}
@@ -115,7 +118,7 @@ Change Channel
 
 Select Created Channel
 	[Arguments]	${position}	#first or last
-	Click Element	jquery:.fade_in.extra-margin:${position}
+	Click Element	jquery:${select_channel_locator}${position}
 
 Create And Select Channel
 	[Documentation]	Create a new channel
@@ -137,28 +140,28 @@ Open Answer
 	[Arguments]	${user}
 	Switch Browser	${user}
 	Reload Page
-	Wait Until Element Is Visible	jquery:.action_link.add_response:last
-	Click Element	jquery:.action_link.add_response:last
+	Wait Until Element Is Visible	jquery:${open_answer_locator}
+	Click Element	jquery:${open_answer_locator}
 
 Send Answer
 	[Arguments]	${text}	${user}
 	Switch Browser	${user}
-	Input Text	jquery:.messages_flex .full_width	${text}
-	Click Button	jquery:button.button.small.right-margin
+	Input Text	jquery:${message_flex_locator}	${text}
+	Click Button	jquery:${send_answer_locator}
 
 Send Text from
 	[Arguments]	${text}	${user}
 	Switch Browser	${user}
-	Input Text	jquery:textarea.input:last	${text}
-	Click Button	jquery:button.button.medium.primary
+	Input Text	jquery:${textarea_locator}:last	${text}
+	Click Button	jquery:${send_text_locator}
 
 Create Channel
 	[Documentation]	Create a new channel considering it doesn't exist already
 	[Arguments]	${Channel}
-	Click element	jquery:.uil-plus-circle:first
-	Input Text	jquery:input.full_width.medium	${Channel}
-	Click Button	jquery:button.button.small.primary-text
-	Click Button	jquery:button.button.small.primary
+	Click element	jquery:${plus_locator}
+	Input Text	jquery:${channel_input_locator}	${Channel}
+	Click Button	jquery:${create_channel_locator}
+	Click Button	jquery:${confirm_channel_locator}
 
 Choose A Dialog
 	[Documentation]	Select a random dialog (the first line of it) from the file in the language depending on the global variable

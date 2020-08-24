@@ -56,7 +56,7 @@ Set Date
 	[Arguments]	${day}	${month}
 	${raw Date}=	Evaluate	datetime.datetime(${YEAR},${month},${day})
 	${Date}=	Convert Date	${raw Date}	result_format=%a %Y/%m/%d
-	Input Text	jquery:.input.form-control.date:first	${Date}
+	Input Text	jquery:${event_date_locator}	${Date}
 
 
 Get AMPM Hour
@@ -86,29 +86,29 @@ Set Hour
 	${beginning}=	Evaluate	${hour of beg}+${quarter of beg}
 	${input hour}=	Get Hour	${beginning}
 
-	Clear Hour	[ng-model='ctrl.start']:last
-	Input Text	jquery:[ng-model='ctrl.start']:last	${input hour}
-	Click Element	jquery:.modal-title
+	Clear Hour	${first_hour_locator}
+	Input Text	jquery:${first_hour_locator}	${input hour}
+	Click Element	jquery:${modal_title_locator}
 	
 	${duration}=	Evaluate	random.randint(3,10)/4
 
 	${end}=		Evaluate	${beginning}+${duration}
 	${input hour}=	Get Hour	${end}
 
-	Clear Hour	[ng-model='ctrl.end']:last
-	Input Text	jquery:[ng-model='ctrl.end']:last	${input hour}
-	Click Element	jquery:.modal-title
+	Clear Hour	${end_hour_locator}
+	Input Text	jquery:${end_hour_locator}	${input hour}
+	Click Element	jquery:${modal_title_locator}
 	[Return]	${end}
 
 Create Event
-	Click Button	jquery:.waves-effect.waves-light.btn-accent
+	Click Button	jquery:${creation_button}
 	Wait Until Page Contains	No repetition	timeout=10
 	Sleep	0.1
 	${event}=	Get Random Field In File	${PATH NAME}
 	${name}	${description}	@{attribute}=	Split String	${event}	|
 
-	Input Text	jquery:.event-form .input.title	${name}
-	Input Text	jquery:[ng-model='editedEvent.description']	${description}
+	Input Text	jquery:${event_title_locator}	${name}
+	Input Text	jquery:${event_descripion_locator}	${description}
 	[Return]	${attribute}
 
 Set Date and Hour of Event
@@ -126,23 +126,23 @@ Set Date and Hour of Event
 Set Details
 	[Documentation]	Set details of the event
 	[Arguments]	${attribute}
-	Input Text	jquery:[ng-model='editedEvent.location']	Paris, France
+	Input Text	jquery:${event_location_locator}	Paris, France
 	${num}=		Evaluate	-1
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	many
 	Run Keyword If	${bool}	Set Local Variable	${num}	5
 	@{email names}=	Get x Random Field In File	${Organizer}	${num}
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	alone
 	Run Keyword If	${bool}	Set Local Variable	${email names}	
-	Input Text	jquery:[type='email']:last	${login},
+	Input Text	jquery:${email_locator}	${login},
 	FOR	${email name}	IN	@{email names}
-		Input Text	jquery:[type='email']:last	${email name},
+		Input Text	jquery:${email_locator}	${email name},
 	END
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	weekly
-	Run Keyword If	${bool}	Select From List By Value	jquery:[ng-model="vm.freq"]	2
+	Run Keyword If	${bool}	Select From List By Value	jquery:${frequence_locator}	2
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	allday
-	Run Keyword If	${bool}	Click Element	jquery:[ng-model="ctrl.full24HoursDay"]
+	Run Keyword If	${bool}	Click Element	jquery:${full_day_locator}
 	${alarm}=	Evaluate	str(random.randint(2,7))
-	Select From List By Value	jquery:[ng-model="ctrl.trigger"]	${alarm}
+	Select From List By Value	jquery:${alarm_locator}	${alarm}
 
 Create Events Of A Day
 	[Documentation]	Create all (3) events in the given day
