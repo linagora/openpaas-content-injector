@@ -57,23 +57,23 @@ Set Formated Hour
 	[Documentation]	Set the given hour for the event
 	[Arguments]	${BegHour}	${EndHour}
 
-	Clear Hour	[ng-model='ctrl.start']:last
-	Input Text	jquery:[ng-model='ctrl.start']:last	${BegHour}
-	Click Element	jquery:.modal-title
+	Clear Hour	${first_hour_locator}
+	Input Text	jquery:${first_hour_locator}	${BegHour}
+	Click Element	jquery:${modal_title_locator}
 	
-	Clear Hour	[ng-model='ctrl.end']:last
-	Input Text	jquery:[ng-model='ctrl.end']:last	${EndHour}
-	Click Element	jquery:.modal-title
+	Clear Hour	${end_hour_locator}
+	Input Text	jquery:${end_hour_locator}	${EndHour}
+	Click Element	jquery:${modal_title_locator}
 
 Create Formated Event
 	[Arguments]		${Date}		${Name}		${BegHour}	${EndHour}
-	Click Button	jquery:.waves-effect.waves-light.btn-accent
+	Click Button	jquery:${creation_button}
 	Wait Until Page Contains	No repetition	timeout=10
 	Sleep	0.1
-	Input Text	jquery:.event-form .input.title	${Name}
+	Input Text	jquery:${event_title_locator}	${Name}
 	Set Formated Hour  ${BegHour}  ${EndHour}
-	Input Text	jquery:.input.form-control.date:first	${Date}
+	Input Text	jquery:${event_date_locator}	${Date}
 	${alarm}=	Evaluate	str(random.randint(2,7))
-	Select From List By Value	jquery:[ng-model="ctrl.trigger"]	${alarm}
-	Input Text	jquery:[ng-model='editedEvent.location']	Paris, France
-	Click Button	jquery:button.btn.btn-primary.save
+	Select From List By Value	jquery:${alarm_locator}	${alarm}
+	Input Text	jquery:${event_location_locator}	Paris, France
+	Click Button	jquery:${save_button_locator}
