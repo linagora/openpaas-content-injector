@@ -15,7 +15,7 @@ urls.read(os.path.join(dataPath, 'Config', 'sitesUrl'))
 host = urls['Linshare']['url']
 
 cred = configparser.ConfigParser()
-cred.read(os.path.join(dataPath, 'Config', 'logins'))
+cred.read(os.path.join(dataPath, 'Config', 'loginOpenPaas'))
 logins = cred.sections()
 
 verbose = False

@@ -51,7 +51,7 @@ event_list = EmailSending.main(parsing.language, parsing.month, parsing.day, par
 
 event_to_create = {}
 cred = configparser.ConfigParser()
-cred.read(os.path.join(data_path, 'Config', 'logins'))
+cred.read(os.path.join(data_path, 'Config', 'loginOpenPaas'))
 
 logins = cred.sections()
 for l in logins:

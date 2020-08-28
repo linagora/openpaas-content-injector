@@ -23,7 +23,7 @@ ${meridiem}	AM
 *** Tasks ***
 Set Variables
 	Set Global Variable	${PATH NAME}	${PATH}/Events/${LANGUAGE}_Name_events
-	Set Global Variable	${PATH LOGINS}	${PATH}/Config/logins
+	Set Global Variable	${PATH LOGINS}	${PATH}/Config/loginOpenPaas
 	Parse A File	${PATH}/Config/sitesUrl
 	${LOGIN OP}=	Get Item	Calendar	url
 	Set Global Variable		${LOGIN OP}

@@ -42,7 +42,7 @@ cd openpaas-content-injector
 ```
 
 ### Set up
-You will first need to rename the three files `logins.dist`, `loginTwake.dist` and `sitesUrl.dist` in the `RawData/Config` folder by removing the `.dist` and then complete them, with the data you will use (logins and urls of the OpenPaas different sites).
+You will first need to rename the three files `loginOpenPaas.dist`, `loginTwake.dist` and `sitesUrl.dist` in the `RawData/Config` folder by removing the `.dist` and then complete them, with the data you will use (logins and urls of the OpenPaas different sites).
 
 > Note: The credentials must have been already created for OpenPaas and Twake. <br>
 On OpenPaas, the first user in the file will be the administrator of Linshare folders. <br>

@@ -148,7 +148,7 @@ def upload_file(file_path: str) -> dict:
     header_upload = header_auth
     content_type = os.path.splitext(file_path)[1]
 
-    if content_type in ['.png', '.jpeg', '.gif']:
+    if content_type in ['.png', '.jpeg', '.gif', '.jpg']:
         header_upload["Content-Type"] = 'image/'+ content_type[1:]
 
     elif content_type in ['.pdf', '.json', '.xml']:
@@ -198,7 +198,7 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
     the given date and the end of the month"""
 
     cred = configparser.ConfigParser()
-    cred.read(os.path.join(data_path, 'Config', 'logins'))
+    cred.read(os.path.join(data_path, 'Config', 'loginOpenPaas'))
     logins = cred.sections()
 
     list_messages = os.listdir(os.path.join(data_path, 'Mails', language))
@@ -240,7 +240,7 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
                 elif 'many' in attribute:
                     sender, *rec = random.sample(range(len(logins)), len(logins))
                     receivers = []
-                    real_message = message.format(receiver=receiver['first_name'],
+                    real_message = message.format(receiver=cred[logins[rec[0]]]['first_name'],
                                                   sender=logins[sender],
                                                   senderMail=cred[logins[sender]]['mail'])
                     for j in rec:
