@@ -4,4 +4,4 @@
 <p>I know there is a lot of heavy lifting and difficult decisions but I do believe we are starting to put a dent in the issues.  At the same time, we are developing a significant franchise of which the Company can be proud.</p> 
 <br> 
 <p>Thank you <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

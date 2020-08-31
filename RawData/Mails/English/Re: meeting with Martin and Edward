@@ -1,4 +1,4 @@
 <h5>{receiver},</h5><br>
 <p>Thanks for your help.  This should work well, assuming Martin and Rdward are available.  Hopefully Lexi will have resumes for you tomorrow.  I will be in touch on details.</p> 
 <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

@@ -5,4 +5,4 @@
 <br> 
 <p>Are there any entities that you think would be interested in an asset management deal that we should approach?  Otherwise, we intend to systematically identify and work through all the candidates.</p> 
 <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

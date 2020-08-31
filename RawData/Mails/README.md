@@ -12,12 +12,12 @@ For example, the file `Needs Assessment_attach_Needs Assessment Form.pdf_` is :
 <br> 
 <p>Once I receive the Needs Assessment back (and you let me know if you can wait a month,) I will be happy to pull a couple of resumes for your review.  If you have any questions, please let me know. Thanks.</p> 
 <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>
 ```
 
-Here, the mail title will be `Needs Assessment`, it has an attachments, which is the file [Needs Assement Form](../Linshare/Files/Needs%20Assessment%20Form.pdf).
+Here, the mail title will be `Needs Assessment`, it has an attachments, which is the file [Needs Assement Form](../Linshare/Files/English/Needs%20Assessment%20Form.pdf).
 
-The formating depends on the details given in the email title. You can always use `{receiver}`, `{sender}` and `{senderMail}`. They will be replaced in the sent email by the receiver *first* name, the sender *full* name and the sender email.
+The formating depends on the details given in the email title. You can always use `{receiver}`, `{sender}` and `{sender_mail}`. They will be replaced in the sent email by the receiver *first* name, the sender *full* name and the sender email.
 
 The file title is a string, each fields are separated with an `_`. The option you can add is one of the following:
 * copy: when the mail is supposed to have a copy. You can use in the html encoding `{in_copy}` which will bre replaced by the full name of the receiver in cipy.

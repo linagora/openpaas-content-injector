@@ -6,4 +6,4 @@
 <div class="openpaas-signature"> -- 
 <br> 
 <p>{sender}
-<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

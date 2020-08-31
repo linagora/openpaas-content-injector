@@ -1,4 +1,4 @@
 <h5>Dear {receiver},</h5><br> 
 <p>Please see exchange below.  Can you send me current plans - who, when, where and what - for London reviews?  I would put a several day moratorium on contacting London regarding upcoming Doorstep review plans until I get back with you.  Thanks.</p> 
 <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

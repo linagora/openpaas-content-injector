@@ -1,4 +1,4 @@
 <h5>Dear {receiver} ,</h5><br> 
 <p>Thank you for your bid.  I have decided on a floor plan.  I am going to have an architect in Austin draw the plans and help me work up a detailed specification list.  I will send you that detailed plan and spec list when complete for a final bid.  Probably in early to mid June.</p> 
 <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

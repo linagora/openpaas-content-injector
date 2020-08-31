@@ -3,4 +3,4 @@
 <p>adding 250 jobs in Burnet.  I am tempted to hold for $3000/acre.  Owner financing would still work.   Do you have an opinion?</p>
 
 <br> <div class=\"openpaas-signature\"> -- <br> 
-<p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

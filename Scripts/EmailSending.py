@@ -232,7 +232,7 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
                     copy = cred[logins[cop]]
                     real_message = message.format(receiver=receiver['first_name'],
                                                   sender=logins[sender],
-                                                  senderMail=cred[logins[sender]]['mail'],
+                                                  sender_mail=cred[logins[sender]]['mail'],
                                                   in_copy=copy['first_name'])
                     receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
                     copies = [{'email' : copy['mail'], 'name' : logins[cop]}]
@@ -242,7 +242,7 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
                     receivers = []
                     real_message = message.format(receiver=cred[logins[rec[0]]]['first_name'],
                                                   sender=logins[sender],
-                                                  senderMail=cred[logins[sender]]['mail'])
+                                                  sender_mail=cred[logins[sender]]['mail'])
                     for j in rec:
                         temp = cred[logins[j]]
                         receivers.append({'email' : temp['mail'], 'name' : logins[j]})
@@ -252,7 +252,7 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
                     receiver = cred[logins[rec]]
                     real_message = message.format(receiver=receiver['first_name'],
                                                   sender=logins[sender],
-                                                  senderMail=cred[logins[sender]]['mail'])
+                                                  sender_mail=cred[logins[sender]]['mail'])
                     receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
                     if len(attribute) > 1:
                         file_name = attribute[1]
@@ -269,7 +269,7 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
                     event_date, hour1, hour2 = calcul_date(sending_date, weekday, hours)
                     real_message = message.format(receiver=receiver['first_name'],
                                                   sender=logins[sender],
-                                                  senderMail=cred[logins[sender]]['mail'],
+                                                  sender_mail=cred[logins[sender]]['mail'],
                                                   event_date=event_date.strftime("%A %d."))
                     receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
                     event_list.append({'date' : event_date.strftime("%a %Y/%m/%d"),
@@ -282,7 +282,7 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
                     receiver = cred[logins[rec]]
                     real_message = message.format(receiver=receiver['first_name'],
                                                   sender=logins[sender],
-                                                  senderMail=cred[logins[sender]]['mail'])
+                                                  sender_mail=cred[logins[sender]]['mail'])
                     receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
 
                 #Set tokens for the corresponding login

@@ -3,4 +3,4 @@
 <br>
 <p>Hopefully this will reach you.</p>
 <br> <div class=\"openpaas-signature\"> -- <br> 
-<p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

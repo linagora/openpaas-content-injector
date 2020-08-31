@@ -6,4 +6,4 @@
 <p>I am writing you because I am very interested in getting to know more about the Risk Management operations at the Company Networks so it would be ideal for me to meet with you to talk about it; however, if not possible in the mean time, I would also appreciate if you could give me some names of people that I could contact to so that I can get acquainted of this side of the Company Networks operations.</p> 
 <br> 
 <p>Thanks a lot,</p> <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

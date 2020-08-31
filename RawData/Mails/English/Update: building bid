@@ -1,4 +1,4 @@
 <h5>Dear {receiver} ,</h5><br> 
 <p>Just wanted to give you an update.  I have changed the unit mix to include some 1 bedrooms and reduced the number of buildings to 12.  Jay Flores is working on the construction drawings.  At the same time I am pursuing FHA financing.  Once the construction drawings are complete I will send them to you for a revised bid.  Your original bid was competitive and I am still attracted to your firm because of your strong local presence and contacts.</p> 
 <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

@@ -1,3 +1,3 @@
 <h5>Дорогой {receiver}, </h5><br> 
 <p> Я буду в Сегине с субботы по понедельник.  Тогда мы можем поговорить об отряде для Уэйда.  Сегодня я снова позвоню в банк, чтобы решить вопрос с авторизацией на счету.  Офис будет работать до полудня в день Памяти.</p> <br> 
-<div class="openpaas-signature"> -- <br> <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<div class="openpaas-signature"> -- <br> <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

@@ -15,4 +15,4 @@
 <br> 
 <p>{отправитель}
 <br>электронная почта: 
-<a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

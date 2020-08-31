@@ -1,4 +1,4 @@
 <h5>Hi {receiver}</h5><br> 
 <p>What's the story on this one?  Who can best answer the four questions posed by Lea?  How soon can we have answers?  Interestingly, I have a 4:00 PM meeting today with Bob Roonny, Paul Potter, Lea Razzy, Bob Fradboard and Cristin Crackett (rescheduled from last Friday re: Project Greenlight, due to Roonny's schedule).  I would like to be more informed than they are at 4:00. <br> Thanks.</p> 
 <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

@@ -1,3 +1,3 @@
 <h5>Дорогой {receiver}, </h5><br>
 <p> Я получил рисунки.  На первый взгляд они хорошо выглядят.  В эти выходные я посмотрю в деталях.  Проформа была в формате мой личный мейл, я смогу посмотреть её на этих выходных.  Есть ли в этом файле временная шкала для инвестиционных долларов?  Я просто хочу узнать, когда вам понадобятся деньги.</p> <br>
- <br> <div class="openpaas-signature"> -- <br> <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+ <br> <div class="openpaas-signature"> -- <br> <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>
