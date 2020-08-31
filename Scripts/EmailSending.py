@@ -193,7 +193,7 @@ def calcul_date(sending_date: datetime.date, weekday: str, hours: str):
     return var_date, hourb, houre
 
 
-def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) -> list(dict()):
+def main(language: str, month: str, day: str, year: str, mail_a_day: int = 5) -> list(dict()):
     """Send an (optionnaly) given number of mails for each days beetween
     the given date and the end of the month"""
 
@@ -209,8 +209,24 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 2) ->
 
     event_list = []
 
-    for k in range(int_day, calendar.monthrange(int_year, int_month)[1]):
-        sending_date = datetime.date(int_year, int_month, k)
+    for k in range(int_day-10, int_day + 20):
+        # change month if needeed
+        if 0 <= k <= calendar.monthrange(int_year, int_month)[1]:
+            sending_date = datetime.date(int_year, int_month, k)
+        elif k < 0:
+            if int_month != 1:
+                sending_date = datetime.date(int_year, int_month - 1,
+                                             k + calendar.monthrange(int_year, int_month - 1)[1])
+            else:
+                sending_date = datetime.date(int_year - 1, 12,
+                                             k + calendar.monthrange(int_year - 1, 12)[1])
+        else:
+            if int_month != 12:
+                sending_date = datetime.date(int_year, int_month + 1,
+                                         k - calendar.monthrange(int_year, int_month)[1])
+            else:
+                sending_date = datetime.date(int_year + 1, 1,
+                                         k - calendar.monthrange(int_year, int_month)[1])
         if sending_date.weekday() < 5:
             for _ in range(mail_a_day):
 

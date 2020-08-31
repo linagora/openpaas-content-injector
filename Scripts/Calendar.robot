@@ -47,14 +47,26 @@ Create And Save Events
 	${number of days}=	Evaluate	calendar.monthrange(${YEAR}, ${MONTH})[1]
 	${is ampm}=	Run Keyword And Return Status	Page Should Contain	12:00 PM
 	Set Global Variable	${is ampm}
-	FOR    ${day}    IN RANGE    ${DAY}	${number of days}+1
-		Continue For Loop If	datetime.date(${YEAR}, ${MONTH}, ${day}).weekday()>4
-		Create Events Of A Day	${day}	${MONTH}
+	FOR    ${day}    IN RANGE    ${DAY}-10	${DAY}+20
+		${real_day}=	Set Variable If
+		...	(0 <= ${day} <= ${number of days})	${day}
+		...	${day} < 0 and ${MONTH} == 1	${day} + 1 + calendar.monthrange(${YEAR} - 1, 12)[1]
+		...	${day} < 0 and ${MONTH} > 1		${day} + 1 + calendar.monthrange(${YEAR}, ${MONTH} - 1)[1]		${day} - ${number of days}
+		${real_month}=	Set Variable If
+		...	(0 <= ${day} <= ${number of days})	${MONTH}
+		...	${day} < 0 and ${MONTH} == 1	12
+		...	${day} < 0 and ${MONTH} > 1		${MONTH} - 1
+		...	${day} > ${number of days} and ${MONTH} == 12	1	${MONTH} + 1
+		${real_year}=	Set Variable If
+		...	${day} < 0 and ${MONTH} == 1	${YEAR} - 1
+		...	${day} > ${number of days} and ${MONTH} == 12	${YEAR} + 1		${YEAR}
+		Continue For Loop If	datetime.date(${real_year}, ${real_month}, ${real_day}).weekday()>4
+		Create Events Of A Day	${real_day}	${real_month}	${real_year}
 	END
 
 Set Date
-	[Arguments]	${day}	${month}
-	${raw Date}=	Evaluate	datetime.datetime(${YEAR},${month},${day})
+	[Arguments]	${year}	${day}	${month}
+	${raw Date}=	Evaluate	datetime.datetime(${year},${month},${day})
 	${Date}=	Convert Date	${raw Date}	result_format=%a %Y/%m/%d
 	Input Text	jquery:${event_date_locator}	${Date}
 
@@ -80,7 +92,7 @@ Get Hour
 Set Hour
 	[Documentation]	Set the hour of the event
 	[Arguments]	${possible debut hour}
-	${hour of beg}=	Evaluate	random.randint(${possible debut hour},${possible debut hour}+1)
+	${hour of beg}=	Evaluate	random.randint(${possible debut hour}, ${possible debut hour}+3)
 	${quarter of beg}=	Evaluate	random.randint(0,3)/4
 
 	${beginning}=	Evaluate	${hour of beg}+${quarter of beg}
@@ -98,7 +110,6 @@ Set Hour
 	Clear Hour	${end_hour_locator}
 	Input Text	jquery:${end_hour_locator}	${input hour}
 	Click Element	jquery:${modal_title_locator}
-	[Return]	${end}
 
 Create Event
 	Click Button	jquery:${creation_button}
@@ -113,23 +124,18 @@ Create Event
 
 Set Date and Hour of Event
 	[Documentation]	Set the date and the hour of the event
-	[Arguments]	${day}	${month}	${hour}	${attribute}
-	${next hour}=	Set Hour	${hour}
-	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	evening
-	Run Keyword If	${bool}	Set Hour	19
-	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	lunch
-	Run Keyword If	${bool}	Set Hour	12
-	${next hour}=	Evaluate	int(math.ceil(${next hour}))
-	Set Date	${day}	${month}
-	[Return]	${next hour}
+	[Arguments]	${year}	${day}	${month}	${hour}	${attribute}
+	${real_hour}=	Set Variable If
+	...	'evening' in ${attribute}	19
+	...	'lunch' in ${attribute}	12	${hour}
+	Set Hour	${real_hour}	
+	Set Date	${year}	${day}	${month}
 
 Set Details
 	[Documentation]	Set details of the event
 	[Arguments]	${attribute}
 	Input Text	jquery:${event_location_locator}	Paris, France
-	${num}=		Evaluate	-1
-	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	many
-	Run Keyword If	${bool}	Set Local Variable	${num}	5
+	${num}=	Set Variable If	'many' in ${attribute}	5	-1
 	@{email names}=	Get x Random Field In File	${Organizer}	${num}
 	${bool}=	Run Keyword And Return Status	Should Contain	${attribute}	alone
 	Run Keyword If	${bool}	Set Local Variable	${email names}	
@@ -146,11 +152,12 @@ Set Details
 
 Create Events Of A Day
 	[Documentation]	Create all (3) events in the given day
-	[Arguments]	${day}	${month}
-	${hour}=	Evaluate	9
-	FOR	${i}	IN RANGE	3
-		${attribute}=	Create Event
-		${hour}=	Set Date and Hour of Event	${day}	${month}	${hour}	${attribute}
-		Set Details	${attribute}
-		Save Event
-	END
+	[Arguments]	${day}	${month}	${year}
+	${attribute}=	Create Event
+	Set Date and Hour of Event	${year}	${day}	${month}	9	${attribute}
+	Set Details	${attribute}
+	Save Event
+	${attribute}=	Create Event
+	Set Date and Hour of Event	${year}	${day}	${month}	14	${attribute}
+	Set Details	${attribute}
+	Save Event

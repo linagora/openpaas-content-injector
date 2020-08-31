@@ -59,11 +59,11 @@ Set Formated Hour
 
 	Clear Hour	${first_hour_locator}
 	Input Text	jquery:${first_hour_locator}	${BegHour}
-	Click Element	jquery:${modal_title_locator}
+	Click Button	jquery:${ok_button_hour}
 	
 	Clear Hour	${end_hour_locator}
 	Input Text	jquery:${end_hour_locator}	${EndHour}
-	Click Element	jquery:${modal_title_locator}
+	Click Button	jquery:${ok_button_hour}
 
 Create Formated Event
 	[Arguments]		${Date}		${Name}		${BegHour}	${EndHour}

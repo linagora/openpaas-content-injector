@@ -1,7 +1,7 @@
 ## Twake
 
 #### ChannelTitle
-This file contains the titles given to the channels added in the Twake workspace.
+This file contains the titles given to the channels added in the Twake workspace. You can add and remove them at will.
 
 #### Dialogues
 This files contains the database of the dialogs injected in Twake. A dialog is always beetween two people, for convenience. Each line corresponds to a replica.

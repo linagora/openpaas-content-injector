@@ -13,7 +13,7 @@ ${LOGIN URL}	https://web_adress_of_twake
 
 ${PATH}		../RawData
 ${LANGUAGE}	English			#can either be Russian or English, set `--variable LANGUAGE:Russian` in the options of the robot call
-${NB OF MESSAGES}	${3}
+${NB OF MESSAGES}	${3}	#can be changed to go faster
 ${COMPANY NAME}		Test
 ${workspaceName}	Main Workspace
 
@@ -45,19 +45,84 @@ Open Twake
 		Change Company	${COMPANY NAME}
 	END
 
-Close Twake
-	Close All Browsers
+Create Tasks
+	[Tags]	all
+	[Documentation]	Create tasks from the Data files
+	Switch Browser	1
+	Wait And Click	jquery:${task_icon}
+	#Wait And Click	jquery:${dots_first_board}
+	#Wait And Click	jquery:${suppress_board}
+	#Wait And Click	jquery:${suppress_board_confirm}
+	Wait And Click	jquery:${create_board_plus}
+	Reinitialize Parser
+	Parse A File	${PATH}/Twake/${LANGUAGE}_Tasks
+	@{tasks}=	Get Sections List
+	${text}=	Get Item	DEFAULT	board_name
+	Press Keys	None	${text}
+	Sleep  0.1
+	Click Button	jquery:${create_board_confirm}
+	Wait And Click	jquery:div:contains(${text}):last
+	Wait And Click	jquery:${add_tasklist}
+	${text}=	Get Item	DEFAULT	task_list_name
+	Press Keys	None	${text}
+	Sleep  0.2
+	Wait Until Element Is Visible	jquery:${create_board_confirm}
+	Click Button	jquery:${create_board_confirm}
+	FOR	${task}	IN	@{tasks}
+		Wait And Click	jquery:${add_task}
+		${text}=	Get Item	${task}	name
+		Press Keys	None	${text}
+		Sleep  0.1
+		Click Button	jquery:${create_board_confirm}
+		Wait And Click	jquery:div:contains(${text}):last
+		${text}=	Get Item	${task}	assignees
+		Run Keyword If	'${text}' == 'yes'	Click Button	jquery:${add_all_button}
+		${text}=	Get Item	${task}	tags
+		Add Tags	${text}
+		${text}=	Get Item	${task}	subtasks
+		Add Subtasks	${text}
+		Press Keys	None	ESC
+	END
+
+
+*** Keywords ***
+Wait And Click
+	[Arguments]	${query}
+	Wait Until Element Is Visible	${query}	timeout=10
+	Click Element	${query}
+
+Add Tags
+	[Arguments]	${tags}
+	@{tag_list}=	Split String	${tags}	,
+	Log To Console	${tag_list}
+	FOR	${tag}	IN	@{tag_list}
+		Log To Console	${tag_list}
+		Click Button	jquery:${add_tag}
+		Press Keys	None	${tag}
+		Sleep  0.1
+		Click Button	jquery:${create_board_confirm}
+	END
+
+Add Subtasks
+	[Arguments]	${subtasks}
+	@{subtask_list}=	Split String	${subtasks}	,
+	FOR${subtask}	IN	@{subtask_list}
+		Click Button	jquery:${add_subtask}
+		Press Keys	None	${subtasks}
+		Sleep  0.1
+		Click Button	jquery:${create_board_confirm}
+	END
 
 Write Dialogs In General And Random Channels
 	[Documentation]	Write the desired number of dialogs in default channels
 	[Tags]	all
 	Create Workspace	${workspaceName}
-	FOR	${i}	IN RANGE	1	6
+	FOR	${i}	IN RANGE	1	${numberUsers}
 		Switch Browser	${i}
 		Select Created Channel	first
 	END
 	Fill One Channel
-	FOR	${i}	IN RANGE	1	6
+	FOR	${i}	IN RANGE	1	${numberUsers}
 		Switch Browser	${i}
 		Select Created Channel	last
 	END
@@ -72,10 +137,13 @@ Write Dialogs In Other Channels
 	@{Channels}=	Split To Lines	${Channel File}
 	FOR	${Channel}	IN	@{Channels}
 		Create And Select Channel	${Channel}
-		Fill One Channel
+		Fill One Channel	1
 	END
 
-*** Keywords ***
+Close Twake
+	Close All Browsers
+
+
 Input Twake Credentials
 	[Arguments]	${username}	${password}
 	Input Text	username	${username}
@@ -107,7 +175,7 @@ Create Workspace
 	END
 	Click Button	jquery:${button_locator}
 	Wait Until Element Is Visible	jquery:${textarea_locator}	timeout=10
-	FOR	${i}	IN RANGE	2	6
+	FOR	${i}	IN RANGE	2	${numberUsers}
 		Switch Browser	${i}
 		Change Channel	${workspaceName}
 	END
@@ -123,7 +191,7 @@ Select Created Channel
 Create And Select Channel
 	[Documentation]	Create a new channel
 	[Arguments]	${CHANNEL}
-	FOR	${i}	IN RANGE	1	6
+	FOR	${i}	IN RANGE	1	${numberUsers}
 		Switch Browser	${i}
 		Run Keyword If	$i==1	Create Channel	${CHANNEL}
 		Run Keyword If	$i==1	Wait Until Element Is Visible	jquery:div:contains('${CHANNEL}')
@@ -131,7 +199,8 @@ Create And Select Channel
 	END
 
 Fill One Channel
-	FOR	${j}	IN RANGE	${NB OF MESSAGES}
+	[Arguments]	${nb_of_threads}=${NB OF MESSAGES}
+	FOR	${j}	IN RANGE	${nb_of_threads}
 		${nb}	${File}=	Choose a Dialog
 		Write The Dialog	${nb}	${File}
 	END

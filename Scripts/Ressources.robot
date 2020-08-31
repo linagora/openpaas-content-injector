@@ -17,6 +17,7 @@ ${save_button_locator}	button.btn.btn-primary.save
 ${last_button}		.waves-effect:last
 ${close_button}		.close-button
 ${credentials_button}	button.btn.btn-success
+${ok_button_hour}	.btn.btn-sm.btn-default.btn-block.clockpicker-button:last
 
 #For Twake:
 ${textarea_locator}	textarea.input
@@ -29,10 +30,22 @@ ${open_answer_locator}		.action_link.add_response:last
 ${message_flex_locator}		.messages_flex .full_width
 ${send_answer_locator}		button.button.small.right-margin
 ${send_text_locator}		button.button.medium.primary
-${plus_locator}		.uil-plus-circle:first
+${plus_locator}				.uil-plus-circle:first
 ${channel_input_locator}	input.full_width.medium
 ${create_channel_locator}	button.button.small.primary-text
 ${confirm_channel_locator}	button.button.small.primary
+${task_icon}				.icon-unicon.uil-check-square.undefined
+${dots_first_board}			.options:first
+${suppress_board}			.menu.error
+${suppress_board_confirm}	.button.medium:last
+${create_board_plus}		.MuiSvgIcon-root.m-icon-small:last
+${create_board_confirm}		.button.small
+${add_tasklist}				.rounded-btn.list_add
+${add_task}					.add_task.unselected:last
+${add_all_button}			.button.small.primary-text:last
+${add_tag}					.button.small.secondary-text:first
+${add_subtask}				.checklist .button.small.secondary-text
+${text_input}				.input.full_width
 
 *** Keywords ***
 Get Random Field In File
@@ -55,11 +68,11 @@ Get x Random Field In File
 	Run Keyword If	${Exclude}!=-1	Evaluate	${logins}.pop(${Exclude})
 	${Size}=	Evaluate	len(${logins})
 	${number}=	Evaluate 	random.randint(1, $Size//2 +1)
-	Run Keyword If	${numberp}!=-1	Set Local Variable	${number}	${numberp}
-	@{linesNumbers}=	Evaluate	random.sample(${logins}, min(${number}, ${Size}-1))
+	${number}=	Set Variable If	${numberp}!=-1	${numberp}	${number}
+	@{names}=	Evaluate	random.sample(${logins}, min(${number}, ${Size}-1))
 	@{lines}=	Create List
-	FOR	${lineNumber}	IN	@{linesNumbers}
-		${line}=	Get Item	${logins}[${lineNumber}]	mail
+	FOR	${attendee}	IN	@{names}
+		${line}=	Get Item	${attendee}	mail
 		Append To List	${lines}	${line}
 	END
 	[Return]	${lines}

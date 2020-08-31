@@ -50,7 +50,7 @@ On Twake, the company must have been already created and the first user in the c
 
 
 ### Launch all the scripts
-Once the repository cloned, you can launch all the scripts, giving the required arguments : language, month, day and year. The script will send emails and create events beetween the given date and the end of the month.
+Once the repository cloned, you can launch all the scripts, giving the required arguments : language, month, day and year. The script will send emails and create events around that date - from ten days before to twenty after to be precise.
 >Note: you can launch the script several times if you want more than one month to be filled
 
 >Warning: give the numbers without any `0` in front of them : for instance, write `7` and not `007`
