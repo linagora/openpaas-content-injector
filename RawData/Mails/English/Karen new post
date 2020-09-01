@@ -1,10 +1,10 @@
-<p>Hi {receiver}, <br> 
-<p>This will probably be the first of many emails in the next couple of weeks.</p> 
-<br> 
-<p>Do you have a location as to where Karen will be sitting over there?  We'll be packing up her boxes soon to ship over and for future post etc.</p> 
-<br> 
-<p>Also, she will need a new extension number.  She would most definately prefer an 853 number and if you can use her VP status to help her get one if they refuse (her words) then that would be great.  Her old number was 853-5521 although someone else may have that now.</p> 
-<br> 
-<p>Thank you for your help.  It is very much appreciated.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
+<p>Hi {receiver}, <br>
+<p>This will probably be the first of many emails in the next couple of weeks.</p>
+<br>
+<p>Do you have a location as to where Karen will be sitting over there?  We'll be packing up her boxes soon to ship over and for future post etc.</p>
+<br>
+<p>Also, she will need a new extension number.  She would most definately prefer an 853 number and if you can use her VP status to help her get one if they refuse (her words) then that would be great.  Her old number was 853-5521 although someone else may have that now.</p>
+<br>
+<p>Thank you for your help.  It is very much appreciated.</p>
+<br> <div class="openpaas-signature"> -- <br>
  <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

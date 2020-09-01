@@ -1,4 +1,4 @@
-<h5>Уважаемые {receiver},</h5><br> 
-<p>Оппы! забыли добавить статью.</p> 
-<p>На самом деле!!</p> <br> 
+<h5>Уважаемые {receiver},</h5><br>
+<p>Оппы! забыли добавить статью.</p>
+<p>На самом деле!!</p> <br>
 <p>Простите еще раз,</p> <br> <div class="openpaas-signature"> -- <br> <p>{sender}<br>электронная почта: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

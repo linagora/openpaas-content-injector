@@ -4,18 +4,19 @@ Use the scripts to prepare and fill the OpenPaas platform with data : mails, mes
 ## Dependencies
 The scripts uses Python3 and [Robotframework](http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html) and also some aditionnal packages. If you don't have Python3 or Robotframework, you'll have to install them.
 
-### Install Python3
+### Install Python3 and pip
 
 ```
 sudo apt update
 sudo apt install software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install python3.8
+sudo apt install python3
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
 ```
+> Note: You may need to install `distutils` before installing `pip` with `sudo apt install python3-distutils`
 
 ### Install RobotFramework and the other python dependencies
-In order to install Robotframework and Selenium you will need to have [pip](http://pip-installer.org) installed and then install them with
+In order to install Robotframework and Selenium you will need to have [pip](https://pip-installer.org) installed and then install them with
 ```
 pip install robotframework
 pip install --upgrade robotframework-seleniumlibrary

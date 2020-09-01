@@ -1,7 +1,7 @@
 <h5>Hello dear {receiver} ,</h5><br>
- <p> Got your message.  Good luck on the bike ride.</p> 
-<p> What were you doing to your apartment?  Are you setting up a studio?</p> 
+ <p> Got your message.  Good luck on the bike ride.</p>
+<p> What were you doing to your apartment?  Are you setting up a studio?</p>
 <br>
 <p>The kids are back in school.  Otherwise just work is going on here.</p>
-<br> <div class=\"openpaas-signature\"> -- <br> 
+<br> <div class=\"openpaas-signature\"> -- <br>
 <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

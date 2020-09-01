@@ -1,9 +1,0 @@
-[DEFAULT]
-board_name : First Board
-task_list_name : Incoming works
-
-[First]
-name : Explain how Twake works
-tags : Urgent
-subtasks : Collaboration|Tasks Management
-assignees : yes

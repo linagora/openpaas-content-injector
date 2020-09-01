@@ -1,6 +1,6 @@
-<h5>Dear {receiver},</h5><br> 
-<p>Just a quick note and request regarding our UK & Continental Power Doorstep review we will be performing.  Please provide a list of books, curves and deal types used for UK & Continental Power.  In addition, please send information on any large, structured, out of the norm transactions and any transactions that are calculated outside of the core trading system.</p> 
-<br> 
-<p>Please provide this information early next week.  Look forward to seeing you.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
+<h5>Dear {receiver},</h5><br>
+<p>Just a quick note and request regarding our UK & Continental Power Doorstep review we will be performing.  Please provide a list of books, curves and deal types used for UK & Continental Power.  In addition, please send information on any large, structured, out of the norm transactions and any transactions that are calculated outside of the core trading system.</p>
+<br>
+<p>Please provide this information early next week.  Look forward to seeing you.</p>
+<br> <div class="openpaas-signature"> -- <br>
  <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

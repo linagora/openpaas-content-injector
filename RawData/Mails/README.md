@@ -7,11 +7,11 @@ The name of the file gives the title of the email, as well as details about it.
 
 For example, the file `Needs Assessment_attach_Needs Assessment Form.pdf_` is :
 ```html
-<h5>Hey {receiver},</h5><br> 
+<h5>Hey {receiver},</h5><br>
 <p>I received your note from Bob Lebowsky.  I am the ENA Staffing Coordinator and need for you to fill out the attached Needs Assessment form before I can send you any resumes.  Also, would you be interested in the new class?  Analysts start with the business units on Aug. 3rd and Assoc. start on Aug. 28th.  We are starting to place the Associates and would like to see if you are interested.  Please let me know.</p>
-<br> 
-<p>Once I receive the Needs Assessment back (and you let me know if you can wait a month,) I will be happy to pull a couple of resumes for your review.  If you have any questions, please let me know. Thanks.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
+<br>
+<p>Once I receive the Needs Assessment back (and you let me know if you can wait a month,) I will be happy to pull a couple of resumes for your review.  If you have any questions, please let me know. Thanks.</p>
+<br> <div class="openpaas-signature"> -- <br>
  <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>
 ```
 

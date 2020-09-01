@@ -1,4 +1,4 @@
-<h5>{receiver},</h5><br> 
-<p>I won't be able to attend the meeting on Friday.   I have an eye doctor's appointment at 9:30, so it is also unlikely that I will be able to call in, unless I am pleasantly surprised and he is running on time!  I will take the dial in number with me to the appointment in the event that I am somewhere in the process that allows me to dial in.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
+<h5>{receiver},</h5><br>
+<p>I won't be able to attend the meeting on Friday.   I have an eye doctor's appointment at 9:30, so it is also unlikely that I will be able to call in, unless I am pleasantly surprised and he is running on time!  I will take the dial in number with me to the appointment in the event that I am somewhere in the process that allows me to dial in.</p>
+<br> <div class="openpaas-signature"> -- <br>
  <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

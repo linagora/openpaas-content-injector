@@ -20,11 +20,11 @@ ${credentials_button}	button.btn.btn-success
 ${ok_button_hour}	.btn.btn-sm.btn-default.btn-block.clockpicker-button:last
 
 #For Twake:
-${textarea_locator}	textarea.input
-${company_logo}		.current_company_logo
+${textarea_locator}		textarea.input
+${company_logo}			.current_company_logo
 ${add_workspace_locator}	.workspace.workspaceadd
-${input_locator}	.input
-${button_locator}	.button
+${input_locator}		.input
+${button_locator}		.button
 ${select_channel_locator}	.fade_in.extra-margin:
 ${open_answer_locator}		.action_link.add_response:last
 ${message_flex_locator}		.messages_flex .full_width
@@ -40,12 +40,16 @@ ${suppress_board}			.menu.error
 ${suppress_board_confirm}	.button.medium:last
 ${create_board_plus}		.MuiSvgIcon-root.m-icon-small:last
 ${create_board_confirm}		.button.small
+${create_board_panel}		.menu-list.as_frame.skew_in_right
 ${add_tasklist}				.rounded-btn.list_add
 ${add_task}					.add_task.unselected:last
 ${add_all_button}			.button.small.primary-text:last
 ${add_tag}					.button.small.secondary-text:first
 ${add_subtask}				.checklist .button.small.secondary-text
 ${text_input}				.input.full_width
+${all_boards}				.app_back_btn
+${board_name_locator}		.board_frame.fade_in
+${confirm_tag}				.menu.is_selected
 
 *** Keywords ***
 Get Random Field In File

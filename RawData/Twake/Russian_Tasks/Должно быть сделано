@@ -1,0 +1,15 @@
+[DEFAULT]
+board_name : Главная доска
+task_list_name : Должно быть сделано
+
+[First]
+name : Объяснить команде, как работает Twake
+tags : Срочно
+subtasks : Сотрудничество,Управление задачами
+assignees : yes
+
+[Second]
+name : Поставить "Звезду" в репозитории Twake на Github
+tags : Срочно
+subtasks : https://github.com/TwakeApp/Twake
+assignees : no

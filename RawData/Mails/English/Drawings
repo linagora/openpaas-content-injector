@@ -1,6 +1,6 @@
-<h5>Dear {receiver} ,</h5><br> 
-<p> I received the drawings.  They look good at first glance.  I will look atthem in depth this weekend.  The proforma was in the winmail.dat format which I cannot open.  Please resend in excel or a pdf format.  If you will send it to my personnal email adress, I will be able to look at it this weekend.  Doesthis file have a timeline for the investment dollars?  I just want to get afeel for when you will start needing money.</p> 
-<br> 
-<br> 
-<br> <div class="openpaas-signature"> -- <br> 
+<h5>Dear {receiver} ,</h5><br>
+<p> I received the drawings.  They look good at first glance.  I will look atthem in depth this weekend.  The proforma was in the winmail.dat format which I cannot open.  Please resend in excel or a pdf format.  If you will send it to my personnal email adress, I will be able to look at it this weekend.  Doesthis file have a timeline for the investment dollars?  I just want to get afeel for when you will start needing money.</p>
+<br>
+<br>
+<br> <div class="openpaas-signature"> -- <br>
  <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

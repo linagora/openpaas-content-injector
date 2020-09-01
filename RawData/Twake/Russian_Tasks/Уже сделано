@@ -1,0 +1,15 @@
+[DEFAULT]
+board_name : Главная доска
+task_list_name : Уже сделано
+
+[First]
+name : Написать диалоги в каналах
+tags :
+subtasks :
+assignees : no
+
+[Second]
+name : Создать список задач
+tags :
+subtasks : Поиск имен,Поиск задач
+assignees : no

@@ -1,4 +1,4 @@
-<h5>Hi {receiver}</h5><br> 
-<p>Do you want to have Carolin Bur join us for this budget meeting to review IT Infrastructure costs?  She owns that piece of the ENW budget.  Let me know.  Another option is that Tony and I could cover those costs, with the option to contact Carolin if more detail is required.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
+<h5>Hi {receiver}</h5><br>
+<p>Do you want to have Carolin Bur join us for this budget meeting to review IT Infrastructure costs?  She owns that piece of the ENW budget.  Let me know.  Another option is that Tony and I could cover those costs, with the option to contact Carolin if more detail is required.</p>
+<br> <div class="openpaas-signature"> -- <br>
  <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

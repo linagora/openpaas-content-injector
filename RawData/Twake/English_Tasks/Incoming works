@@ -1,0 +1,9 @@
+[DEFAULT]
+board_name : Developers
+task_list_name : Incoming works
+
+[First]
+name : Import discussions from the previous collaborative tool
+tags : Urgent,Collaboration
+subtasks : Messages,Files
+assignees : yes

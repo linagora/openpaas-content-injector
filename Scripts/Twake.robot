@@ -26,6 +26,8 @@ Set Variables
 	Set Global Variable		${LOGIN URL}
 	${COMPANY NAME}=	Get Item	Twake	company_name
 	Set Global Variable		${COMPANY NAME}
+	${workspaceName}=	Get Item	Twake	workspace_name_${LANGUAGE}
+	Set Global Variable	${workspaceName}
 
 Open Twake
 	[Tags]	all
@@ -45,84 +47,16 @@ Open Twake
 		Change Company	${COMPANY NAME}
 	END
 
-Create Tasks
-	[Tags]	all
-	[Documentation]	Create tasks from the Data files
-	Switch Browser	1
-	Wait And Click	jquery:${task_icon}
-	#Wait And Click	jquery:${dots_first_board}
-	#Wait And Click	jquery:${suppress_board}
-	#Wait And Click	jquery:${suppress_board_confirm}
-	Wait And Click	jquery:${create_board_plus}
-	Reinitialize Parser
-	Parse A File	${PATH}/Twake/${LANGUAGE}_Tasks
-	@{tasks}=	Get Sections List
-	${text}=	Get Item	DEFAULT	board_name
-	Press Keys	None	${text}
-	Sleep  0.1
-	Click Button	jquery:${create_board_confirm}
-	Wait And Click	jquery:div:contains(${text}):last
-	Wait And Click	jquery:${add_tasklist}
-	${text}=	Get Item	DEFAULT	task_list_name
-	Press Keys	None	${text}
-	Sleep  0.2
-	Wait Until Element Is Visible	jquery:${create_board_confirm}
-	Click Button	jquery:${create_board_confirm}
-	FOR	${task}	IN	@{tasks}
-		Wait And Click	jquery:${add_task}
-		${text}=	Get Item	${task}	name
-		Press Keys	None	${text}
-		Sleep  0.1
-		Click Button	jquery:${create_board_confirm}
-		Wait And Click	jquery:div:contains(${text}):last
-		${text}=	Get Item	${task}	assignees
-		Run Keyword If	'${text}' == 'yes'	Click Button	jquery:${add_all_button}
-		${text}=	Get Item	${task}	tags
-		Add Tags	${text}
-		${text}=	Get Item	${task}	subtasks
-		Add Subtasks	${text}
-		Press Keys	None	ESC
-	END
-
-
-*** Keywords ***
-Wait And Click
-	[Arguments]	${query}
-	Wait Until Element Is Visible	${query}	timeout=10
-	Click Element	${query}
-
-Add Tags
-	[Arguments]	${tags}
-	@{tag_list}=	Split String	${tags}	,
-	Log To Console	${tag_list}
-	FOR	${tag}	IN	@{tag_list}
-		Log To Console	${tag_list}
-		Click Button	jquery:${add_tag}
-		Press Keys	None	${tag}
-		Sleep  0.1
-		Click Button	jquery:${create_board_confirm}
-	END
-
-Add Subtasks
-	[Arguments]	${subtasks}
-	@{subtask_list}=	Split String	${subtasks}	,
-	FOR${subtask}	IN	@{subtask_list}
-		Click Button	jquery:${add_subtask}
-		Press Keys	None	${subtasks}
-		Sleep  0.1
-		Click Button	jquery:${create_board_confirm}
-	END
-
 Write Dialogs In General And Random Channels
 	[Documentation]	Write the desired number of dialogs in default channels
 	[Tags]	all
 	Create Workspace	${workspaceName}
-	FOR	${i}	IN RANGE	1	${numberUsers}
+	FOR	${i}	IN RANGE	1	${numberUsers}+1
 		Switch Browser	${i}
 		Select Created Channel	first
 	END
 	Fill One Channel
-	FOR	${i}	IN RANGE	1	${numberUsers}
+	FOR	${i}	IN RANGE	1	${numberUsers}+1
 		Switch Browser	${i}
 		Select Created Channel	last
 	END
@@ -140,9 +74,105 @@ Write Dialogs In Other Channels
 		Fill One Channel	1
 	END
 
+Create Tasks
+	[Tags]	all
+	[Documentation]	Create tasks from the Data files
+	Switch Browser	1
+	Wait And Click	jquery:${task_icon}
+	#Wait And Click	jquery:${dots_first_board}
+	#Wait And Click	jquery:${suppress_board}
+	#Wait And Click	jquery:${suppress_board_confirm}
+	${dir_path}=	Set Variable	${PATH}/Twake/${LANGUAGE}_Tasks
+	@{files_list}=	List Files In Directory	${dir_path}
+	FOR	${file}	IN	@{files_list}
+		Create A Task List	${dir_path}/${file}
+	END
+
 Close Twake
 	Close All Browsers
 
+
+*** Keywords ***
+Create A Task List
+	[Arguments]	${path_to_file}
+	Reinitialize Parser
+	Parse A File	${path_to_file}
+	@{tasks}=	Get Sections List
+	${board}=	Get Item	DEFAULT	board_name
+	Go To Board	${board}	
+	Wait And Click	jquery:${add_tasklist}
+	${text}=	Get Item	DEFAULT	task_list_name
+	Press Keys	None	${text}
+	Wait Until Element Is Visible	jquery:${create_board_confirm}
+	Click Button	jquery:${create_board_confirm}
+	Sleep  0.05
+	Press Keys	None	ESC
+	Wait Until Page Does Not Contain Element	jquery:${create_board_panel}
+	Sleep	0.2
+	FOR	${task}	IN	@{tasks}
+		Wait And Click	jquery:${add_task}
+		${text}=	Get Item	${task}	name
+		Press Keys	None	${text}
+		Sleep  0.1
+		Click Button	jquery:${create_board_confirm}
+		Press Keys	None	ESC
+		Wait And Click	jquery:div:contains('${text}'):last
+		${text}=	Get Item	${task}	assignees
+		Run Keyword If	'${text}' == 'yes'	Click Button	jquery:${add_all_button}
+		${text}=	Get Item	${task}	tags
+		Run Keyword If	'${text}'	Add Tags	${text}
+		${text}=	Get Item	${task}	subtasks
+		Run Keyword If	'${text}'	Add Subtasks	${text}
+		Press Keys	None	ESC
+	END
+
+Wait And Click
+	[Arguments]	${query}
+	Sleep	0.05
+	Wait Until Element Is Enabled	${query}	timeout=10
+	Click Element	${query}
+
+Add Tags
+	[Arguments]	${tags}
+	@{tag_list}=	Split String	${tags}	,
+	FOR	${tag}	IN	@{tag_list}
+		Click Button	jquery:${add_tag}
+		Press Keys	None	${tag}
+		Sleep  0.3
+		Click Element	jquery:${confirm_tag}
+		Wait Until Page Does Not Contain Element	jquery:${create_board_panel}
+		Sleep	0.05
+	END
+
+Go To Board
+	[Documentation]	Go to the board and create it if needed
+	[Arguments]	${name_of_the_board}
+	${bool}=	Run Keyword And Return Status	Page Should Contain Element	jquery:${all_boards}
+	Run Keyword If	${bool}	Click Element	jquery:${all_boards}
+	Sleep	0.2
+	${bool}=	Run Keyword And Return Status	Page Should Contain Element	jquery:${board_name_locator}:contains('${name_of_the_board}')
+	Run Keyword If	not(${bool})	Create Board	${name_of_the_board}
+	Wait And Click	jquery:${board_name_locator}:contains('${name_of_the_board}')
+
+Create Board
+	[Arguments]	${name_of_the_board}
+	Wait And Click	jquery:${create_board_plus}
+	Press Keys	None	${name_of_the_board}
+	Sleep  0.1
+	Click Button	jquery:${create_board_confirm}
+	Press Keys	None	ESC
+	Wait Until Page Does Not Contain Element	jquery:${create_board_panel}
+	Sleep	0.5
+
+Add Subtasks
+	[Arguments]	${subtasks}
+	@{subtask_list}=	Split String	${subtasks}	,
+	FOR	${subtask}	IN	@{subtask_list}
+		Click Button	jquery:${add_subtask}
+		Press Keys	None	${subtask}
+		Sleep  0.2
+		Click Button	jquery:${create_board_confirm}
+	END
 
 Input Twake Credentials
 	[Arguments]	${username}	${password}
@@ -157,7 +187,7 @@ Change Company
 	${shortName}=	Get Substring	${companyName}	0	6
 	${todo}=	Run Keyword And Return Status	Page Should Not Contain	${shortName}
 	Run Keyword If	${todo}	Click Element	jquery:${company_logo}
-	Run Keyword If	${todo}	Click Element	jquery:div:contains(${COMPANY NAME}):last
+	Run Keyword If	${todo}	Click Element	jquery:div:contains('${COMPANY NAME}'):last
 	Wait Until Element Is Visible	jquery:${textarea_locator}
 
 Create Workspace
@@ -175,7 +205,7 @@ Create Workspace
 	END
 	Click Button	jquery:${button_locator}
 	Wait Until Element Is Visible	jquery:${textarea_locator}	timeout=10
-	FOR	${i}	IN RANGE	2	${numberUsers}
+	FOR	${i}	IN RANGE	2	${numberUsers}+1
 		Switch Browser	${i}
 		Change Channel	${workspaceName}
 	END
@@ -191,7 +221,7 @@ Select Created Channel
 Create And Select Channel
 	[Documentation]	Create a new channel
 	[Arguments]	${CHANNEL}
-	FOR	${i}	IN RANGE	1	${numberUsers}
+	FOR	${i}	IN RANGE	1	${numberUsers}+1
 		Switch Browser	${i}
 		Run Keyword If	$i==1	Create Channel	${CHANNEL}
 		Run Keyword If	$i==1	Wait Until Element Is Visible	jquery:div:contains('${CHANNEL}')
