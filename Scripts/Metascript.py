@@ -3,6 +3,8 @@
 import argparse
 import subprocess
 import os
+from datetime import datetime
+import sys
 import configparser
 import EmailSending
 import Linshare
@@ -23,18 +25,21 @@ parser.add_argument("year")
 
 # parse the arguments
 parsing = parser.parse_args()
+date_exec = datetime.now()
 
 #Execute first RobotFramework script: Twake
-print("Sending messages in Twake...")
+print("Sending messages in Twake...", sep=' ', end=' ', file=sys.stdout)
 first_script = ['robot', '--outputdir', log_path,
                 '--noncritical', 'all',
                 '--variable', f'LANGUAGE:{parsing.language}',
                 '--variable', f'PATH:{data_path}',
                 os.path.join(script_path, 'Twake.robot')]
 subprocess.run(first_script, cwd=log_path, stdout=FNULL)
+print(" "*32, datetime.now() - date_exec)
+date_exec = datetime.now()
 
 #Execute second RF script: Create Event
-print("Creating events in the calendar...")
+print("Creating events in the calendar...", sep=' ', end=' ', file=sys.stdout))
 second_script = ['robot', '--outputdir', log_path,
                  '--noncritical', 'all',
                  '--variable', f'LANGUAGE:{parsing.language}',
@@ -44,9 +49,11 @@ second_script = ['robot', '--outputdir', log_path,
                  '--variable', f'YEAR:{parsing.year}',
                  os.path.join(script_path, 'Calendar.robot')]
 subprocess.run(second_script, cwd=log_path, stdout=FNULL)
+print(" "*26, datetime.now() - date_exec)
+date_exec = datetime.now()
 
 #Execute third script (python): Send emails
-print("Sending emails...")
+print("Sending emails...", sep=' ', end=' ', file=sys.stdout))
 event_list = EmailSending.main(parsing.language, parsing.month, parsing.day, parsing.year)
 
 event_to_create = {}
@@ -72,7 +79,11 @@ third_script = ['robot', '--outputdir', log_path,
                 '--variablefile', file_path,
                 os.path.join(script_path, 'CalendarLinksWithMails.robot')]
 subprocess.run(third_script, cwd=log_path, stdout=FNULL)
+print(" "*43, datetime.now() - date_exec)
+date_exec = datetime.now()
 
 #Execute the fourth script (python): Fill Linshare
-print("Filling Linshare")
+print("Filling Linshare...", sep=' ', end=' ', file=sys.stdout))
 Linshare.main(parsing.language)
+print(" "*41, datetime.now() - date_exec)
+date_exec = datetime.now()
