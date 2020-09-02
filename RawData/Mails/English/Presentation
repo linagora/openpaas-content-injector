@@ -1,4 +1,4 @@
-<h5>Dear {receiver},</h5><br> 
-<p>I have reviewed my section of Matthew's presentation ( to be given by Lucy) and all looks fine except for page with world map.  Can we add Portland to the map?  That is the true trading location that is missing.  If it is tough to do, don't worry about it.  Thanks.</p>  -- <br> 
-<p>Thanks for your nice note.  I have fun being here, which makes all of this even better!</p> <br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<h5>Dear {receiver},</h5><br>
+<p>I have reviewed my section of Matthew's presentation ( to be given by Lucy) and all looks fine except for page with world map.  Can we add Portland to the map?  That is the true trading location that is missing.  If it is tough to do, don't worry about it.  Thanks.</p>  -- <br>
+<p>Thanks for your nice note.  I have fun being here, which makes all of this even better!</p> <br> <div class="openpaas-signature"> -- <br>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

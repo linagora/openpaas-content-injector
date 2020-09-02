@@ -1,5 +1,5 @@
-<h5>Dear {receiver} ,</h5><br> 
-<p>I got your email.  I didn't have time to finish it.  I will read it this weekend and ask my dad about the a/c's.  I am glad you are enjoying the job.  This weekend I will mark up the lease and rules.  If I didn't mention this when I was there, the 4th is a paid holiday for you and Jane.</p> 
-<p>Have a good weekend and I will talk to you next week.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<h5>Dear {receiver} ,</h5><br>
+<p>I got your email.  I didn't have time to finish it.  I will read it this weekend and ask my dad about the a/c's.  I am glad you are enjoying the job.  This weekend I will mark up the lease and rules.  If I didn't mention this when I was there, the 4th is a paid holiday for you and Jane.</p>
+<p>Have a good weekend and I will talk to you next week.</p>
+<br> <div class="openpaas-signature"> -- <br>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

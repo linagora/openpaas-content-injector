@@ -7,6 +7,8 @@ url : https://openpaas.example.org/#/calendar
 [Twake]
 url : https://example.twake.app/
 company_name : Company Name
+workspace_name_English : Some Name
+workspace_name_Russian : Название
 
 [Email]
 url : https://jmap.openpass.example.org/

@@ -1,14 +1,14 @@
-<h5>Dear {receiver} ,</h5><br> 
-<p> Now that #44 is rented and you have settled in for a couple of months, we need to focus on expenses and recordkeeping.</p> 
-<br> 
-<p> First, I want to implement the following changes: <br> 
-<p>  1.  No Overtime without my written (or email) instructions.</p> 
-<p>  2.  Daily timesheets for you and Wade faxed to me daily</p>   
+<h5>Dear {receiver} ,</h5><br>
+<p> Now that #44 is rented and you have settled in for a couple of months, we need to focus on expenses and recordkeeping.</p>
+<br>
+<p> First, I want to implement the following changes: <br>
+<p>  1.  No Overtime without my written (or email) instructions.</p>
+<p>  2.  Daily timesheets for you and Wade faxed to me daily</p>
 <p>  3.  Paychecks will be issued each Friday by me at the State Bank </p>
-<p>  4.  No more expenditures on office or landscape than is necessary for basic operations.</p> 
-<br> 
-<p> Moving on to the checkbook, I have attached a spreadsheet that organizes all the checks since Jan. 1.</p> 
-<p> When you open the file, go to the "Checkbook" tab and look at the yellow highlighted items.  I have questions about these items.</p> 
-<p> Please gather receipts so we can discuss.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<p>  4.  No more expenditures on office or landscape than is necessary for basic operations.</p>
+<br>
+<p> Moving on to the checkbook, I have attached a spreadsheet that organizes all the checks since Jan. 1.</p>
+<p> When you open the file, go to the "Checkbook" tab and look at the yellow highlighted items.  I have questions about these items.</p>
+<p> Please gather receipts so we can discuss.</p>
+<br> <div class="openpaas-signature"> -- <br>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

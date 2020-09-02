@@ -1,5 +1,5 @@
 Logs/*
-RawData/Config/logins
+RawData/Config/loginOpenPaas
 RawData/Config/loginTwake
 RawData/Config/sitesUrl
 RawData/Events/EventsFromMails.py

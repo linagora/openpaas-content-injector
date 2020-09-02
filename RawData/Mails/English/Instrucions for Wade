@@ -1,9 +1,9 @@
-<h5>Dear {receiver} ,</h5><br> 
-<p> I want to speak to Wade myself.  He can call me at work or home. Or if you email me his number I will call him.</p> 
-<p> I would like Gary to direct Wade on renovation tasks and you can give him work orders for normal maintenance.</p> 
-<br> 
-<p> I will call you tomorrow to discuss items from the office.  Do you need Jenny to come in on any more Fridays?  I think I  can guess your answer.</p> 
-<br> 
-<p> I might stop by this Friday.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<h5>Dear {receiver} ,</h5><br>
+<p> I want to speak to Wade myself.  He can call me at work or home. Or if you email me his number I will call him.</p>
+<p> I would like Gary to direct Wade on renovation tasks and you can give him work orders for normal maintenance.</p>
+<br>
+<p> I will call you tomorrow to discuss items from the office.  Do you need Jenny to come in on any more Fridays?  I think I  can guess your answer.</p>
+<br>
+<p> I might stop by this Friday.</p>
+<br> <div class="openpaas-signature"> -- <br>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

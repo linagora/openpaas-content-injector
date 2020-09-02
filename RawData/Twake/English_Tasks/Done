@@ -1,0 +1,15 @@
+[DEFAULT]
+board_name : Main Board
+task_list_name : Done
+
+[First]
+name : Write dialogs in the channels
+tags :
+subtasks :
+assignees : no
+
+[Second]
+name : Create a task list
+tags :
+subtasks : Find names,Find tasks
+assignees : no

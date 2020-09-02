@@ -1,5 +1,5 @@
-<h5>Dear {receiver},</h5><br> 
-<br> 
-<p> Can you give access to the new west power site to Jessica Meitreyer.  She is an analyst in our group.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
+<h5>Dear {receiver},</h5><br>
+<br>
+<p> Can you give access to the new west power site to Jessica Meitreyer.  She is an analyst in our group.</p>
+<br> <div class="openpaas-signature"> -- <br>
+ <p>{sender}<br>email: <a href="mailto:{sender_mail}">{sender_mail}</a></p></div>

@@ -1,7 +1,0 @@
-<h5>Dear {receiver} ,</h5><br> 
-<p>I tried to run the model and it did not work<br> 
-<p>Please plan to attend a meeting on Friday, {eventDate} at 11:15 a.m. in 30C1 to discuss the transportation model.  Now that we have had several traders managing transportation positions for several months, I would like to discuss any issues you have with the way the model works.   I have asked Litin Zhu (Research), Harold Grease and Jack Griffith (Structuring) to attend so they will be available to answer any technical questions. The point of this meeting is to get all issues out in the open and make sure everyone is comfortable with using the model and position manager, and to make sure those who are managing the books believe in the model's results.   Since I have heard a few concerns, I hope you will take advantage of this opportunity to discuss them.</p> 
-<br> 
-<p>Please let me know if you are unable to attend.</p> 
-<br> <div class="openpaas-signature"> -- <br> 
- <p>{sender}<br>email: <a href="mailto:{senderMail}">{senderMail}</a></p></div>
