@@ -147,12 +147,11 @@ def upload_file(file_path: str) -> dict:
 
     header_upload = header_auth
     content_type = os.path.splitext(file_path)[1]
-
     if content_type in ['.png', '.jpeg', '.gif', '.jpg']:
-        header_upload["Content-Type"] = 'image/'+ content_type[1:]
+        header_upload["Content-Type"] = 'image/'+ content_type.split('.')[1]
 
     elif content_type in ['.pdf', '.json', '.xml']:
-        header_upload["Content-Type"] = 'application/'+ content_type[1:]
+        header_upload["Content-Type"] = 'application/'+ content_type.split('.')[1]
 
     elif content_type == '.odt':
         header_upload["Content-Type"] = 'application/vnd.oasis.opendocument.text'
@@ -209,24 +208,10 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 5) ->
 
     event_list = []
 
-    for k in range(int_day-10, int_day + 20):
+    for k in range(-10, 20):
         # change month if needeed
-        if 0 <= k <= calendar.monthrange(int_year, int_month)[1]:
-            sending_date = datetime.date(int_year, int_month, k)
-        elif k < 0:
-            if int_month != 1:
-                sending_date = datetime.date(int_year, int_month - 1,
-                                             k + calendar.monthrange(int_year, int_month - 1)[1])
-            else:
-                sending_date = datetime.date(int_year - 1, 12,
-                                             k + calendar.monthrange(int_year - 1, 12)[1])
-        else:
-            if int_month != 12:
-                sending_date = datetime.date(int_year, int_month + 1,
-                                         k - calendar.monthrange(int_year, int_month)[1])
-            else:
-                sending_date = datetime.date(int_year + 1, 1,
-                                         k - calendar.monthrange(int_year, int_month)[1])
+        sending_date = datetime.date(int_year, int_month, int_day) + datetime.timedelta(days=k)
+        
         if sending_date.weekday() < 5:
             for _ in range(mail_a_day):
 
@@ -274,6 +259,9 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 5) ->
                         file_name = attribute[1]
                     else:
                         file_name = list_attachments[random.randrange(len(list_attachments))]
+                    send = cred[logins[sender]]
+                    mail, passw = send['mail'], send['password']
+                    set_tokens(mail, passw)
                     file_path = os.path.join(data_path, 'Linshare', 'Files', language, file_name)
                     attachments.append(upload_file(file_path))
 
@@ -302,9 +290,10 @@ def main(language: str, month: str, day: str, year: str, mail_a_day: int = 5) ->
                     receivers = [{'email' : receiver['mail'], 'name' : logins[rec]}]
 
                 #Set tokens for the corresponding login
-                send = cred[logins[sender]]
-                mail, passw = send['mail'], send['password']
-                set_tokens(mail, passw)
+                if not 'attach' in attribute:
+                    send = cred[logins[sender]]
+                    mail, passw = send['mail'], send['password']
+                    set_tokens(mail, passw)
 
                 outbox_id = getoutbox_id()
 

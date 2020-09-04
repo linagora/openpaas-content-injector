@@ -6,12 +6,12 @@ This file contains the titles given to the channels added in the Twake workspace
 ## Dialogues
 This files contains the database of the dialogs injected in Twake. A dialog is always beetween two people, for convenience. Each line corresponds to a replica.
 
-Each dialog is separated from others by a linebreak, so to add a dialog you just have to add it at the end of the file, with a mandatory linebreak at its end.
+Each dialog is separated from others by a linebreak, so to add a dialog you just have to add it at the end of the file, with a mandatory linebreak after it.
 
 ## Tasks
 The English and Russian folders work the same way, the files use an INI structure. In Twake, you can manage tasks in boards, in each board you can create lists of tasks (for example, `To do`, `Done`).
 
-A file in these folders describes a list of task. It will be organized this way:
+A file in these folders describes a list of task. It must be organized this way:
 ```
 [DEFAULT]
 board_name : Main Board

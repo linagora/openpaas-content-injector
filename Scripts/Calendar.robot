@@ -44,24 +44,13 @@ Set One Month Of Events
 *** Keywords ***
 Create And Save Events
 	[Documentation]	Create all the events of the month taken as an input
-	${number of days}=	Evaluate	calendar.monthrange(${YEAR}, ${MONTH})[1]
 	${is ampm}=	Run Keyword And Return Status	Page Should Contain	12:00 PM
 	Set Global Variable	${is ampm}
-	FOR    ${day}    IN RANGE    ${DAY}-10	${DAY}+20
-		${real_day}=	Set Variable If
-		...	(0 <= ${day} <= ${number of days})	${day}
-		...	${day} < 0 and ${MONTH} == 1	${day} + 1 + calendar.monthrange(${YEAR} - 1, 12)[1]
-		...	${day} < 0 and ${MONTH} > 1		${day} + 1 + calendar.monthrange(${YEAR}, ${MONTH} - 1)[1]		${day} - ${number of days}
-		${real_month}=	Set Variable If
-		...	(0 <= ${day} <= ${number of days})	${MONTH}
-		...	${day} < 0 and ${MONTH} == 1	12
-		...	${day} < 0 and ${MONTH} > 1		${MONTH} - 1
-		...	${day} > ${number of days} and ${MONTH} == 12	1	${MONTH} + 1
-		${real_year}=	Set Variable If
-		...	${day} < 0 and ${MONTH} == 1	${YEAR} - 1
-		...	${day} > ${number of days} and ${MONTH} == 12	${YEAR} + 1		${YEAR}
-		Continue For Loop If	datetime.date(${real_year}, ${real_month}, ${real_day}).weekday()>4
-		Create Events Of A Day	${real_day}	${real_month}	${real_year}
+	${arg_date}=	Evaluate	datetime.datetime(${YEAR}, ${MONTH}, ${DAY})	
+	FOR    ${k}    IN RANGE    -10	+20
+		${current_date}=	 Add Time To Date	${arg_date}	${k} days	result_format=datetime
+		Continue For Loop If	datetime.date(${current_date.year}, ${current_date.month}, ${current_date.day}).weekday()>4
+		Create Events Of A Day	${current_date.day}	${current_date.month}	${current_date.year}
 	END
 
 Set Date

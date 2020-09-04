@@ -47,29 +47,28 @@ cd openpaas-content-injector
 ### Set up
 You will first need to rename the three files `loginOpenPaas.dist`, `loginTwake.dist` and `sitesUrl.dist` in the `RawData/Config` folder by removing the `.dist` and then complete them, with the data you will use (logins and urls of the different OpenPaas sites).
 
-> Note: The credentials must have been already created for OpenPaas and Twake. <br>
+> Note: The accounts must have been already created for OpenPaas and Twake. <br>
 On OpenPaas, the first user in the file will be the administrator of Linshare folders. <br>
 On Twake, the company must have been already created and the first user in the configuration file must have manager's rights.
 
 
 ### Launch all the scripts
-Before running the scripts for the first time, you will need to create a Logs directory (in the `openpaas-content-injector` folderS):
+Before running the scripts for the first time, you will need to create a Logs directory (in the `openpaas-content-injector` folder):
 ```
 mkdir Logs
 ```
-Once the repository cloned, you can launch all the scripts, giving the required arguments : language, month, day and year. The script will send emails and create events around that date - from ten days before to twenty after to be precise.
->Note: you can launch the script several times if you want more than one month to be filled
+Once the repository cloned, you can launch all the scripts, giving the required arguments : language, month, day and year. The script will send emails and create events around that date - beetween ten days before and twenty after that date to be precise.
 
 >Warning: give the numbers without any `0` in front of them : for instance, write `7` and not `007`
 ```
-python3 Scripts/Metascript.py English 7 14 2020
+python3 Scripts/main.py English 7 14 2020
 ```
 
 ### Launch one script
 You can also launch only one script with Python or Robotframework depending on which one you want. With Python3:
 ```
-python3 Scripts/EmailSending.py Russian 7 14 2020
-python3 Scripts/Linshare.py English
+python3 Scripts/email_sending.py Russian 7 14 2020
+python3 Scripts/linshare.py English
 ```
 And with Robotframework:
 ```

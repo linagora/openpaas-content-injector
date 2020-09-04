@@ -4,10 +4,9 @@ import argparse
 import subprocess
 import os
 from datetime import datetime
-import sys
 import configparser
-import EmailSending
-import Linshare
+import email_sending
+import linshare
 
 log_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'Logs'))
 data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'RawData'))
@@ -54,7 +53,7 @@ date_exec = datetime.now()
 
 #Execute third script (python): Send emails
 print("Sending emails...", end=' ', flush=True)
-event_list = EmailSending.main(parsing.language, parsing.month, parsing.day, parsing.year)
+event_list = email_sending.main(parsing.language, parsing.month, parsing.day, parsing.year)
 
 event_to_create = {}
 cred = configparser.ConfigParser()
@@ -84,6 +83,6 @@ date_exec = datetime.now()
 
 #Execute the fourth script (python): Fill Linshare
 print("Filling Linshare...", end=' ', flush=True)
-Linshare.main(parsing.language)
+linshare.main(parsing.language)
 print(" "*41, datetime.now() - date_exec)
 date_exec = datetime.now()
