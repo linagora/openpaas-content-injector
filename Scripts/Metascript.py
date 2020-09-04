@@ -28,7 +28,7 @@ parsing = parser.parse_args()
 date_exec = datetime.now()
 
 #Execute first RobotFramework script: Twake
-print("Sending messages in Twake...", sep=' ', end=' ', file=sys.stdout)
+print("Sending messages in Twake...", end=' ', flush=True)
 first_script = ['robot', '--outputdir', log_path,
                 '--noncritical', 'all',
                 '--variable', f'LANGUAGE:{parsing.language}',
@@ -39,7 +39,7 @@ print(" "*32, datetime.now() - date_exec)
 date_exec = datetime.now()
 
 #Execute second RF script: Create Event
-print("Creating events in the calendar...", sep=' ', end=' ', file=sys.stdout))
+print("Creating events in the calendar...", end=' ', flush=True)
 second_script = ['robot', '--outputdir', log_path,
                  '--noncritical', 'all',
                  '--variable', f'LANGUAGE:{parsing.language}',
@@ -53,7 +53,7 @@ print(" "*26, datetime.now() - date_exec)
 date_exec = datetime.now()
 
 #Execute third script (python): Send emails
-print("Sending emails...", sep=' ', end=' ', file=sys.stdout))
+print("Sending emails...", end=' ', flush=True)
 event_list = EmailSending.main(parsing.language, parsing.month, parsing.day, parsing.year)
 
 event_to_create = {}
@@ -83,7 +83,7 @@ print(" "*43, datetime.now() - date_exec)
 date_exec = datetime.now()
 
 #Execute the fourth script (python): Fill Linshare
-print("Filling Linshare...", sep=' ', end=' ', file=sys.stdout))
+print("Filling Linshare...", end=' ', flush=True)
 Linshare.main(parsing.language)
 print(" "*41, datetime.now() - date_exec)
 date_exec = datetime.now()
